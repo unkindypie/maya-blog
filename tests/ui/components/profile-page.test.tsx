@@ -99,6 +99,10 @@ describe("MDX profile components", () => {
     expect(markup).toContain("<dt>Editor</dt>");
     expect(markup).toContain('href="https://example.com/repo"');
     expect(markup).toContain('href="mailto:author@example.com"');
+    expect(markup).toContain(
+      'href="https://example.com/repo" target="_blank" rel="noopener noreferrer"',
+    );
+    expect(markup).toContain('href="mailto:author@example.com">');
     expect(markup).toContain("My version");
     expect(markup.match(/<dt>/g)).toHaveLength(2);
     expect(markup.match(/<dd>/g)).toHaveLength(2);

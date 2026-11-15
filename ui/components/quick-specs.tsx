@@ -40,12 +40,18 @@ export function SpecRow({
   href,
   wide,
 }: Readonly<SpecRowProps>) {
+  const isExternal = href !== undefined && /^https?:\/\//.test(href);
   return (
     <div className={`spec-row${wide ? " spec-wide" : ""}`}>
       <dt>{label}</dt>
       <dd>
         {href ? (
-          <a className="spec-value spec-link" href={href}>
+          <a
+            className="spec-value spec-link"
+            href={href}
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "noopener noreferrer" : undefined}
+          >
             {value} <span aria-hidden="true">↗</span>
           </a>
         ) : (
