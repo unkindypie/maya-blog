@@ -68,13 +68,18 @@ describe("SiteNav", () => {
     expect(markup).toContain("no posts yet");
     expect(markup).toContain('href="/blog"');
   });
-  it("expands Projects and links to the real project card anchors", () => {
-    current.pathname = "/projects/";
-    const markup = renderToStaticMarkup(<SiteNav variant="explorer" />);
-    expect(markup.match(/open=""/g)).toHaveLength(1);
-    for (const id of ["mvim", "dotfiles", "local-ai", "oot-mods"]) {
-      expect(markup).toContain(`href="/projects#${id}"`);
-    }
-    expect(markup).toMatch(/<a[^>]*aria-current="page"[^>]*href="\/projects"/);
-  });
+  it.each(["/projects", "/projects/"])(
+    "links directly to Projects at %s without redundant children",
+    (pathname) => {
+      current.pathname = pathname;
+      const markup = renderToStaticMarkup(<SiteNav variant="explorer" />);
+      expect(markup).toMatch(
+        /<a[^>]*aria-current="page"[^>]*href="\/projects"/,
+      );
+      expect(markup.match(/href="\/projects"/g)).toHaveLength(1);
+      expect(markup).not.toContain('href="/projects#');
+      expect(markup).not.toContain('open=""');
+      expect(markup.match(/<details/g)).toHaveLength(1);
+    },
+  );
 });

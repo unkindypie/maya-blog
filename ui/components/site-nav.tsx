@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { Post } from "@/lib/posts";
-import { navigation, projectLinks } from "@/lib/site-content";
+import { navigation } from "@/lib/site-content";
 import { SystemIcon } from "./system-icon";
 export interface SiteNavProps {
   readonly posts?: readonly Post[];
@@ -29,22 +29,12 @@ export function SiteNav({
           href === "/"
             ? pathname === "/" || pathname === "/about"
             : pathname === href || pathname.startsWith(`${href}/`);
-        if (
-          variant === "explorer" &&
-          (href === "/blog" || href === "/projects")
-        ) {
-          const entries =
-            href === "/blog"
-              ? posts.map((post) => ({
-                  href: post.route,
-                  label: `${post.route.split("/").pop()}.md`,
-                  title: post.title,
-                }))
-              : projectLinks.map((project) => ({
-                  href: `/projects#${project.id}`,
-                  label: project.label,
-                  title: project.label,
-                }));
+        if (variant === "explorer" && href === "/blog") {
+          const entries = posts.map((post) => ({
+            href: post.route,
+            label: `${post.route.split("/").pop()}.md`,
+            title: post.title,
+          }));
           return (
             <details
               className="explorer-folder"
@@ -77,7 +67,7 @@ export function SiteNav({
                     <span>{entry.label}</span>
                   </Link>
                 ))}
-                {href === "/blog" && !entries.length && (
+                {!entries.length && (
                   <span className="explorer-empty">no posts yet</span>
                 )}
               </div>

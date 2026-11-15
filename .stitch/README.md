@@ -8,7 +8,7 @@ The About screen `9213bdbb122d4bd19f36d46db08e8572` is the primary visual refere
 - `designs/` contains local downloaded HTML and screenshots; these large reference assets are ignored by Git.
 - `.agents/skills/react-components/resources/style-guide.json` contains the tokens extracted from the primary screen's HTML, including colors, font sizes, spacing, and radii.
 - `app/globals.css` maps the reference tokens into CSS variables and responsive layouts.
-- `content/about.mdx` owns the profile copy and card/spec props; `content/projects.mdx` owns project cards. Shared components handle layout only. `lib/site-content.ts` contains shared navigation, contact links, and Explorer targets. The Stitch screens remain visual references.
+- `content/about.mdx` owns the profile copy and card/spec props; `content/projects.mdx` owns project cards. Shared components handle layout only. `lib/site-content.ts` contains shared navigation and contact links. Projects is a direct Explorer link; Blog expands into article links. The Stitch screens remain visual references.
 
 ## Implementation choices
 

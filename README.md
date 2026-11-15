@@ -18,7 +18,7 @@ Open [localhost:3000](http://localhost:3000). MDX edits reload automatically.
 
 Page content lives in MDX. Edit `content/about.mdx` for the profile text, badges, specs, tool cards, interests, GitHub activity settings, and contact-panel links. The introduction is ordinary Markdown inside `ProfileIntro`; card and spec text is passed as props. The `/now` panel uses `GitHubActivity` with its username, link label, and fallback copy authored in MDX. The homepage imports that same About MDX, so one edit updates both `/` and `/about/`.
 
-Edit `content/projects.mdx` for project cards and prose, and `content/dotfiles.mdx` for the setup guide and screenshots. `ProfileHero`, `ProfileIntro`, `ProfileSection`, `ProfilePanel`, `QuickSpecs`, `SpecRow`, `InfoCard`, and `ProjectGrid` in `ui/components/` own the markup and styling, not the page copy. Shared navigation, footer contact links, and Explorer project targets remain in `lib/site-content.ts`; match each project card's `id` to its Explorer target when adding or renaming one.
+Edit `content/projects.mdx` for project cards and prose, and `content/dotfiles.mdx` for the setup guide and screenshots. `ProfileHero`, `ProfileIntro`, `ProfileSection`, `ProfilePanel`, `QuickSpecs`, `SpecRow`, `InfoCard`, and `ProjectGrid` in `ui/components/` own the markup and styling, not the page copy. Shared navigation and footer contact links remain in `lib/site-content.ts`. The Explorer links directly to Projects; only Blog expands into individual article links.
 
 For example, a spec row in About is editable directly:
 
