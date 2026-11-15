@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { SystemIcon } from "./system-icon";
 export interface InfoCardProps {
   readonly id?: string;
@@ -7,6 +8,7 @@ export interface InfoCardProps {
   readonly description: string;
   readonly tags: readonly string[];
   readonly compact?: boolean;
+  readonly links?: readonly { readonly href: string; readonly label: string }[];
 }
 export function InfoCard({
   id,
@@ -16,6 +18,7 @@ export function InfoCard({
   description,
   tags,
   compact = false,
+  links,
 }: Readonly<InfoCardProps>) {
   return (
     <article id={id} className={`info-card${compact ? " compact" : ""}`}>
@@ -30,6 +33,15 @@ export function InfoCard({
           <span key={tag}>{tag}</span>
         ))}
       </div>
+      {links && (
+        <div className="card-links">
+          {links.map((link) => (
+            <Link key={link.href} href={link.href}>
+              {link.label} <span aria-hidden="true">↗</span>
+            </Link>
+          ))}
+        </div>
+      )}
     </article>
   );
 }

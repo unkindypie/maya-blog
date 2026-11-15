@@ -8,7 +8,7 @@ The About screen `9213bdbb122d4bd19f36d46db08e8572` is the primary visual refere
 - `designs/` contains local downloaded HTML and screenshots; these large reference assets are ignored by Git.
 - `.agents/skills/react-components/resources/style-guide.json` contains the tokens extracted from the primary screen's HTML, including colors, font sizes, spacing, and radii.
 - `app/globals.css` maps the reference tokens into CSS variables and responsive layouts.
-- `lib/site-content.ts` holds profile copy from the reference, navigation, and card data.
+- `lib/site-content.ts` holds the current profile, navigation, repository links, and card data. The profile copy has been rewritten from Maya’s actual configs; the Stitch screens remain visual references.
 
 ## Implementation choices
 

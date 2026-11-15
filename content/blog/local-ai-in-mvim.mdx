@@ -1,0 +1,54 @@
+---
+title: "local AI in mvim: give the model some context"
+date: "2026-11-15"
+description: Cursortab, Ollama, and a bounded LSP cache for completions and next-edit suggestions.
+---
+
+[Project: maya-nvim](https://github.com/unkindypie/maya-nvim) · [Context collector](https://github.com/unkindypie/maya-nvim/blob/master/lua/maya/ai_context.lua)
+
+A local model can see the text around my cursor. That doesn't mean it knows the type of the thing I'm calling, or where a field came from. The language server often does.
+
+The AI part of mvim tries to pass some of that useful information along. It's a bunch of Lua around Cursortab and Ollama, not a model I trained myself.
+
+## one model for two jobs
+
+Cursortab handles inline completions and next-edit suggestions. Ollama serves the local model. The setup uses one model for both jobs instead of asking me to keep two separate models resident.
+
+The installer defaults to Sweep 1.5B Q8. Zeta alternatives are explicit choices in the repo's [AI setup guide](https://github.com/unkindypie/maya-nvim/blob/master/docs/AI.md). Model choice still depends on memory and the rest of the machine's workload; the setup checks the endpoint and residency, not whether the model will write correct code.
+
+Ordinary completion and snippets still work with AI disabled.
+
+## don't wait on the language server while typing
+
+The [context collector](https://github.com/unkindypie/maya-nvim/blob/master/lua/maya/ai_context.lua) gathers LSP hints asynchronously. Prompt hooks read the cache. If the matching entry isn't ready, they get an empty string instead of waiting.
+
+The cache key includes the buffer, its change counter, and the cursor position. Nearby definition snippets are checked against their buffer state too. This helps keep old type information from being reused after the code has changed.
+
+Hover text, signature help, and definition snippets are useful here. Sending everything in the workspace isn't. The collector prioritizes snippets and caps the assembled context at 6,000 characters. That's a context budget in characters, not a promise about the model's token count.
+
+There are cancellation and stale-response guards around the suggestion flow as well. By the time a request comes back, I may already be somewhere else in the file.
+
+## the keys I actually need
+
+| Key        | Action                                                               |
+| ---------- | -------------------------------------------------------------------- |
+| `Space ao` | Enable or reload local AI                                            |
+| `Space ax` | Disable AI                                                           |
+| `Space as` | Show status                                                          |
+| `Space an` | Request a suggestion                                                 |
+| `Tab`      | Accept the selected ordinary completion first, then an AI suggestion |
+| `Ctrl-]`   | Dismiss the suggestion until the next edit                           |
+
+I want the model to help when it has something useful, and be easy to dismiss when it doesn't.
+
+## local stays local unless I choose otherwise
+
+Copilot is a separate, opt-in provider in the same suggestion engine. An unavailable local server doesn't silently switch to the cloud.
+
+The saved model and provider preferences live in Neovim's state directory, outside the repo. The installer can validate a new setup while preserving the previous preferences if validation fails. It doesn't need to delete existing model weights to do that.
+
+## still an experiment
+
+Type context doesn't make a small model understand everything. Suggestions still need reading, and a successful endpoint check says nothing about whether an edit is right.
+
+The interesting part for me is how much useful context I can give it without interrupting the editor. The code and the current tradeoffs are in [maya-nvim](https://github.com/unkindypie/maya-nvim). I'll keep notes as that changes.

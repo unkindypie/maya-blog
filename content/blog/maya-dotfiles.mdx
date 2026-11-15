@@ -1,0 +1,73 @@
+---
+title: ".maya-dotfiles: paper colors, one theme switch"
+date: "2026-11-15"
+description: A shared palette for Hyprland, Kitty, Waybar, launchers, and the shell, with a separate editor theme.
+---
+
+[Repository: unkindypie/.maya-dotfiles](https://github.com/unkindypie/.maya-dotfiles)
+
+I like cream paper, soft pink highlights, and terminals that look a little like a notebook. I also want a dark version when I feel like it. Keeping those two versions consistent across several apps is where the scripts start.
+
+[.maya-dotfiles](https://github.com/unkindypie/.maya-dotfiles) is my Hyprland desktop and terminal setup. I'm running Fedora 44. The repo works with the KooL Fedora Hyprland setup, but the main desktop pieces don't depend on having all of KooL installed.
+
+## the files stay in the repo
+
+The installed configs are linked into `home/` in the checkout. Editing the installed Kitty config, for example, edits the same file that's tracked in Git.
+
+The installer backs up replaced files. There's also a systemd path unit for repairing managed config links if another desktop tool replaces them. That solves one kind of breakage, but it isn't magic: writing through a symlink still changes its target. I check the diff after theme tools have been busy.
+
+The editor is a separate project. The dotfiles installer can offer to set up [maya-nvim](https://github.com/unkindypie/maya-nvim), while my personal mvim settings stay with the dotfiles.
+
+## one palette, two profiles
+
+The source is `color-palette/palette.json`. Light and Dark use the same semantic color names and shared app mappings. The layouts stay the same; the colors change.
+
+Light is the default paper/pastel version. Dark uses warm charcoal and cream. Both keep the pink accents.
+
+After changing the palette, I generate the app-specific files and check them:
+
+```sh filename="from the .maya-dotfiles checkout"
+python3 scripts/generate-palette.py
+python3 scripts/generate-palette.py --check
+python3 scripts/generate-palette.py --audit
+maya-theme apply
+```
+
+The generator checks both profiles. It catches duplicate colors and near-matches that haven't been explicitly accounted for. App roles sometimes need similar colors, but I want that to be a decision I can find again later.
+
+## switching without editing tracked files
+
+```sh
+maya-theme light
+maya-theme dark
+maya-theme toggle
+maya-theme status
+```
+
+The generated profiles live in the repo. `~/.config/maya-theme/current` selects one, and the app palette links go through it. Switching changes that local selector instead of rewriting the tracked colors every time.
+
+That also leaves the wallpaper alone. A color change shouldn't quietly become a different wallpaper choice.
+
+Waybar, Kitty, and tmux can reload their colors through their supported interfaces. The shell picks them up at the next prompt. Rofi and the lockscreen read the selected palette when they open. Some GTK or Qt apps need reopening, especially when a sandbox or an app's own theme gets in the way.
+
+## Kitty and the launcher
+
+Kitty uses Fantasque Sans Mono Nerd Font and a notebook background. The dark profile uses a stronger background tint so the texture doesn't fight the text.
+
+Maya Rofi is the default launcher, with apps, files, terminal, and window tabs. Wofi is there as an alternative. The installer also offers rofi-universal as an explicit option; it isn't required for the normal setup.
+
+I like the little bits here: the cat icon, the pink selection, the small frame around the launcher. They're the parts I look at all day.
+
+## the editor keeps its own colors
+
+My mvim config uses Melange. It doesn't receive a generated desktop palette.
+
+Instead, a small personal module reads the `current` link and selects Melange's light or dark variant through Neovim's `background` option. A filesystem watcher handles changes, and a focus check catches up when needed. The transparent editor background lets Kitty's notebook show through.
+
+That keeps the two repos separate while still making the switch feel like one action.
+
+## the current setup
+
+The [README](https://github.com/unkindypie/.maya-dotfiles#readme) has install instructions. The [theme guide](https://github.com/unkindypie/.maya-dotfiles/blob/master/docs/themes.md) covers which apps reload, what is generated, and where the limits are.
+
+I'm still adding little fixes. Mostly I want to change one thing, see it in the right places, and get back to what I was doing.

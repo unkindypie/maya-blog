@@ -72,7 +72,7 @@ describe("SiteNav", () => {
     current.pathname = "/projects/";
     const markup = renderToStaticMarkup(<SiteNav variant="explorer" />);
     expect(markup.match(/open=""/g)).toHaveLength(1);
-    for (const id of ["handheld-homebrew", "local-ai", "mvim"]) {
+    for (const id of ["mvim", "dotfiles", "local-ai"]) {
       expect(markup).toContain(`href="/projects#${id}"`);
     }
     expect(markup).toMatch(/<a[^>]*aria-current="page"[^>]*href="\/projects"/);

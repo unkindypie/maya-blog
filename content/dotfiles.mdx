@@ -1,36 +1,66 @@
 ---
 title: dotfiles & terminal rig
-description: My editor, shell, and the little details that make a workspace feel like mine.
+description: Fedora, Hyprland, Kitty, mvim, and the colors that tie them together.
 ---
 
-Everything lives here: the editor, the shell, and all the little things that make my computer feel like mine.
+My desktop is Fedora 44 with Hyprland. Kitty, zsh, tmux, and mvim are where I spend most of my time.
 
-> Fast > fancy. A config is only useful if it gets out of the way.
+The configs live in [.maya-dotfiles](https://github.com/unkindypie/.maya-dotfiles). The editor has its own repo: [maya-nvim](https://github.com/unkindypie/maya-nvim).
 
-## core stack components
+## what's running
 
-| Tool          | What I use it for                                                                        |
-| ------------- | ---------------------------------------------------------------------------------------- |
-| Neovim / mvim | Writing code and these notes. Lua config, lazy.nvim, and as little friction as possible. |
-| Kitty         | A terminal that keeps up. Ligatures, keyboard shortcuts, and a quiet color palette.      |
-| zsh           | Moving around the filesystem and doing the small repetitive things.                      |
-| Hyprland      | A keyboard-driven Wayland workspace.                                                     |
+| Tool           | My setup                                                        |
+| -------------- | --------------------------------------------------------------- |
+| Desktop        | Hyprland on Wayland, with Waybar                                |
+| Terminal       | Kitty, Fantasque Sans Mono Nerd Font, and a notebook background |
+| Shell          | zsh, with tmux for terminal sessions                            |
+| Launcher       | Maya Rofi by default; Wofi is an optional alternative           |
+| Editor         | mvim, launched separately from other Neovim setups              |
+| Editor theme   | Melange, with a transparent background                          |
+| Desktop colors | Maya Light and Dark, generated from a shared palette            |
 
-## Neovim, one little tweak at a time
+## my editor config
 
-My core config lives in `~/maya-nvim/`. Personal overrides go in `~/.config/mvim/init.lua`.
+The core lives in `~/maya-nvim/`. My personal settings live in `~/.config/mvim/init.lua`, which is also tracked with my dotfiles.
+
+This is the part that connects the editor to the desktop. It's an excerpt from my personal config; `mvim.desktop_theme` is a personal module included in the dotfiles, not a Neovim built-in.
 
 ```lua filename="~/.config/mvim/init.lua"
+local desktop_theme = require("mvim.desktop_theme")
+
 return {
+  codex_ide_context = true,
+  transparent_background = true,
+  reopen_tabs = true,
+  pokemon_sound_on_start = true,
+  pokemon_sound_on_start_volume_percentage = 50,
   theme = "savq/melange-nvim",
-  options = {
-    -- Keep personal tweaks here.
-  },
+  theme_background = desktop_theme.mode(),
+  setup = function()
+    desktop_theme.setup()
+  end,
 }
 ```
 
-## the boring bits that matter
+maya-nvim ships with Catppuccin Frappé. My personal choice is Melange. Keeping that distinction in the config means someone can use mvim without inheriting every little thing I like.
 
-Prettier for formatting. ESLint and TypeScript for catching mistakes. The same tools in the terminal and the editor, so saving a file doesn't turn into a surprise.
+## one switch for Light and Dark
 
-Still changing things. Probably always will be.
+```sh
+maya-theme light
+maya-theme dark
+maya-theme toggle
+maya-theme status
+```
+
+The selected profile lives behind `~/.config/maya-theme/current`. The desktop tools follow that link. My editor watcher reads the same selection and changes the light/dark variant of Melange. It doesn't copy the desktop colors into Neovim.
+
+The wallpaper stays as it is. Some apps reload immediately; others pick up the colors the next time they open.
+
+## notes from the repos
+
+- [maya-nvim: my editor, with room for yours](/blog/maya-nvim)
+- [.maya-dotfiles: paper colors, one theme switch](/blog/maya-dotfiles)
+- [Local AI in mvim: give the model some context](/blog/local-ai-in-mvim)
+
+Both repos are works in progress. The READMEs have the installation steps and current options.

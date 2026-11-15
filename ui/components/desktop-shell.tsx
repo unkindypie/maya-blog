@@ -1,4 +1,5 @@
 "use client";
+import { contact } from "@/lib/site-content";
 import type { Post } from "@/lib/posts";
 import type { ReactNode } from "react";
 import Link from "next/link";
@@ -46,7 +47,8 @@ export function DesktopShell({ children, posts }: Readonly<DesktopShellProps>) {
         <footer className="system-footer">
           <span>© {new Date().getFullYear()} Maya</span>
           <span>
-            maya.os / written in MDX <span className="status-dot">●</span>
+            <a href={contact.github}>GitHub / unkindypie</a> · maya.os{" "}
+            <span className="status-dot">●</span>
           </span>
         </footer>
       </div>

@@ -1022,3 +1022,28 @@ h3 {
     transition: none;
   }
 }
+
+.card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  padding-top: 16px;
+  font-size: 11px;
+}
+.card-links a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 4px 0;
+}
+.connect-panel > a > span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.connect-panel > a > span:last-child {
+  flex-shrink: 0;
+}
+.command-line > span:first-child {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}

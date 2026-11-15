@@ -1,0 +1,65 @@
+---
+title: "maya-nvim: my editor, with room for yours"
+date: "2026-11-15"
+description: Why mvim keeps the core setup, personal tweaks, and local AI separate.
+---
+
+[Repository: unkindypie/maya-nvim](https://github.com/unkindypie/maya-nvim)
+
+I wanted a Neovim setup that felt familiar when I opened it. File search, an explorer, language tools, formatting, Git diffs. The ordinary things, without having to remember which bit of my config made them work.
+
+That's [maya-nvim](https://github.com/unkindypie/maya-nvim). I launch it with `mvim`. It's inspired by LunarVim, but it's a standalone setup with its own launcher and config directory. My other Neovim configs can stay where they are.
+
+## the core and the personal bits
+
+The main checkout lives in `~/maya-nvim/`. The small `init.lua` loads the modules in order; most of the actual setup lives under `lua/maya/`.
+
+My personal settings go in `~/.config/mvim/init.lua`. This matters more than it sounds. I want to update the core without digging my theme choice and local keybindings out of a merge conflict.
+
+A small personal config can look like this:
+
+```lua filename="~/.config/mvim/init.lua"
+return {
+  theme = "savq/melange-nvim",
+  transparent_background = true,
+  reopen_tabs = true,
+}
+```
+
+The bundled default is Catppuccin Frappé. I use Melange. There are also `options`, `plugins`, and `setup` fields for personal changes. Plugin specs merge after the built-in ones, so an override doesn't need a copy of the whole setup.
+
+My real config adds the desktop Light/Dark watcher too. I've put that part on [the dotfiles page](/dotfiles).
+
+## one inventory for language tools
+
+`lua/maya/languages.lua` holds the language inventory. It describes the servers, packages, and parsers for each filetype. The installer and the editor's first-use setup share that inventory.
+
+For TypeScript, that means the TypeScript language server, ESLint, Prettier, and the right parser. Python uses Ruff and ty. Lua uses lua-language-server and StyLua.
+
+Formatting goes through conform.nvim. For this blog, Prettier runs both in the terminal and on save. I like those two paths agreeing. There isn't much joy in saving a file and getting a different result from CI.
+
+## small things I use all the time
+
+Space opens the key hints. `Space f` finds files, `Space e` opens the explorer, and `Space st` searches text. `H` and `L` move between buffers.
+
+Folder sessions restore files, tabs, and splits when enabled. There are image and diagram previews too: PlantUML gets a preview pane, and SVG can keep its source beside a live view.
+
+And yes, there's a Pokémon greeting on the dashboard. That one is less about productivity.
+
+## sharing files with an external editor
+
+Sometimes another tool changes a file while I have it open. I don't want a reload to throw away something I haven't saved.
+
+The reload module uses Neovim's `checktime`, rather than forcing the buffer to match disk. Modified buffers keep Neovim's conflict handling. `:MayaDiffDisk` opens a read-only snapshot of the disk file beside the current buffer when I need to compare them.
+
+There's also an optional Codex editor-context bridge. It's a community compatibility implementation, and the repo documents the CLI versions it was tested against. I keep it opt-in because that private protocol can change.
+
+## trying it
+
+The [README](https://github.com/unkindypie/maya-nvim#readme) has the bootstrap command, supported platforms, and installer options. The setup targets Linux and macOS, and the installer can ask about local AI separately.
+
+If you already have the checkout, `./install.sh` runs the setup. Personal settings stay in their own directory. `Space Mu` updates the config and plugins; `Space MU` shows the last result.
+
+It's still my daily config, which means it will keep changing. I'm trying to make those changes easier to understand, not turn it into a museum piece.
+
+Next: [how the dotfiles connect the desktop colors](/blog/maya-dotfiles), or [what the local AI gets for context](/blog/local-ai-in-mvim).

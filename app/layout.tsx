@@ -10,7 +10,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: { default: "Maya", template: "%s · Maya" },
   description:
-    "Maya's little corner of the internet. Handhelds, local AI, Neovim, and things I'm figuring out.",
+    "Maya's little corner of the internet. Neovim, Linux dotfiles, local AI, and things I'm figuring out.",
 };
 export interface RootLayoutProps {
   readonly children: ReactNode;

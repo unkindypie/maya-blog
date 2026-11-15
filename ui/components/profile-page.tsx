@@ -1,5 +1,12 @@
 import Link from "next/link";
-import { hardware, interests, now, profile, specs } from "@/lib/site-content";
+import {
+  contact,
+  interests,
+  now,
+  profile,
+  specs,
+  tools,
+} from "@/lib/site-content";
 import { InfoCard } from "./info-card";
 import { SystemIcon } from "./system-icon";
 export interface ProfilePageProps {
@@ -47,12 +54,12 @@ export function ProfilePage({ className = "" }: Readonly<ProfilePageProps>) {
       <section>
         <div className="section-heading">
           <h2>
-            <span>##</span> the daily driver &amp; compute node
+            <span>##</span> what&apos;s in my terminal
           </h2>
-          <small>cat /proc/cpuinfo</small>
+          <small>cat ~/.config/mvim/init.lua</small>
         </div>
         <div className="hardware-grid">
-          {hardware.map((card) => (
+          {tools.map((card) => (
             <InfoCard key={card.label} {...card} compact />
           ))}
         </div>
@@ -60,9 +67,9 @@ export function ProfilePage({ className = "" }: Readonly<ProfilePageProps>) {
       <section>
         <div className="section-heading">
           <h2>
-            <span>##</span> what i actually do &amp; build
+            <span>##</span> things i keep working on
           </h2>
-          <small>core_competencies.json</small>
+          <small>~/projects/</small>
         </div>
         <div className="interests-grid">
           {interests.map((card) => (
@@ -90,10 +97,18 @@ export function ProfilePage({ className = "" }: Readonly<ProfilePageProps>) {
         <section className="connect-panel">
           <div className="section-heading">
             <h2>
-              <span>@</span> explore
+              <span>@</span> connect
             </h2>
-            <small>keep looking around</small>
+            <small>say hi</small>
           </div>
+          <a href={contact.github}>
+            <span>github.com/unkindypie</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a href={`mailto:${contact.email}`}>
+            <span>{contact.email}</span>
+            <span aria-hidden="true">↗</span>
+          </a>
           <Link href="/blog">
             blog / notes to future me <span>↗</span>
           </Link>

@@ -5,101 +5,147 @@ export const navigation = [
   { href: "/projects", label: "projects/", icon: "code" },
 ] as const;
 
+export const contact = {
+  github: "https://github.com/unkindypie",
+  email: "maya1.bondarenko@gmail.com",
+};
+export const repositories = {
+  nvim: "https://github.com/unkindypie/maya-nvim",
+  dotfiles: "https://github.com/unkindypie/.maya-dotfiles",
+};
 export const profile = {
   title: "hey, i'm maya",
   face: "(◕‿◕✿)",
   badges: [
     "she/her 🏳️‍⚧️",
-    "8+ yrs exp :: sr systems architect",
-    "B.S. in Software Engineering",
+    "Linux + Neovim",
+    "local AI tinkering",
     "● status: hacking / alive",
   ],
   intro:
-    "I spent the last 8+ years designing high-scale distributed infra and architecting backends from zero to millions of requests per second across seed to Series B tech teams.",
+    "I like making my tools feel like mine. Most of that ends up in my Neovim config, my Linux desktop, and little scripts that make the two get along.",
   detail:
-    "Now splitting time between private systems consulting, low-level retro handheld homebrew in C/Rust, and tailoring ultra-minimal keyboard-driven Linux environments. Unapologetic linux rice fanatic, lover of clean mathematical abstractions, and cozy terminal aesthetics.",
+    "I use Fedora 44 with Hyprland, Kitty, zsh, and tmux. My editor is mvim, my own Neovim setup. Lately I've been working on local AI suggestions, keeping desktop themes in sync, and writing down the bits I don't want to figure out twice. Handheld homebrew and Nintendo-to-Vita experiments belong here too, when I have something to share.",
 };
 export const specs = [
-  ["OS", "Fedora Silverblue 40"],
-  ["Compositor", "Hyprland / Wayland"],
-  ["Shell / Term", "zsh + kitty (ligatures)"],
-  ["Editor", "neovim (lazy.nvim)"],
-  ["Theme", "Catppuccin Mocha Mauve"],
+  ["OS", "Fedora Linux 44"],
+  ["Desktop", "Hyprland + Waybar"],
+  ["Shell", "zsh + tmux"],
+  ["Terminal", "Kitty / Fantasque Sans Mono"],
+  ["Editor", "mvim / Neovim"],
+  ["Theme", "Melange + Maya Light/Dark"],
 ] as const;
-export const hardware = [
+export const tools = [
   {
-    label: "01 / rig",
+    label: "01 / desktop",
     icon: "laptop",
-    title: "Lenovo Legion S7",
+    title: "Fedora + Hyprland",
     description:
-      "Fedora 40 + Hyprland. Dedicated Wayland workspace with custom eww widgets and sub-50ms render pipeline.",
-    tags: ["AMD 6800H + 32G", "165Hz"],
+      "Waybar, a Rofi launcher, and paper/pastel colors. Maya Light and Dark share the same layout, so switching modes doesn't rearrange my desktop.",
+    tags: ["Fedora 44", "Wayland"],
   },
   {
-    label: "02 / cluster",
-    icon: "chip",
-    title: "M2 Mac Mini Headless",
+    label: "02 / terminal",
+    icon: "terminal",
+    title: "Kitty, zsh & tmux",
     description:
-      "Dedicated local compute running custom Metal Performance Shaders, quantized inference, and private Tailscale exit.",
-    tags: ["MPS Unified Mem", "WireGuard"],
+      "Fantasque Sans Mono in Kitty, a notebook background, and tmux for keeping terminal work together. The shell and status bar follow the desktop palette.",
+    tags: ["Kitty", "tmux"],
   },
   {
     label: "03 / editor",
-    icon: "terminal",
-    title: "Neovim (Lua Rice)",
+    icon: "code",
+    title: "mvim / maya-nvim",
     description:
-      "Strict minimal setup via lazy.nvim. Telescope fuzzy pickers, Treesitter highlighting, LSP with zero bloat (<18ms cold start).",
-    tags: ["init.lua", "<18ms boot"],
+      "My Lua-based Neovim setup. Language tools, formatting, folder sessions, Git diffs, and a Pokémon greeting. Personal tweaks live outside the core config.",
+    tags: ["Lua", "lazy.nvim"],
   },
   {
-    label: "04 / keeb",
-    icon: "keyboard",
-    title: "36-key Corne Split",
+    label: "04 / colors",
+    icon: "folder",
+    title: "Melange + Maya",
     description:
-      "Choc low-profile Robin tactile switches, Miryoku ergonomic layers, thumb clusters configured in ZMK.",
-    tags: ["Bluetooth ZMK", "Col-stagger"],
+      "Melange in the editor, with a transparent background. A small personal watcher follows the desktop's Light/Dark selector without replacing the editor's colors.",
+    tags: ["Melange", "maya-theme"],
   },
 ];
 export const interests = [
   {
-    label: "distributed_systems",
-    icon: "network",
-    title: "High-Throughput APIs & Consensus",
+    label: "editor_tools",
+    icon: "terminal",
+    title: "An editor I can live in",
     description:
-      "8+ years orchestrating distributed event loops, Kafka partitions, Raft state machines, and zero-downtime database migrations under continuous multi-million request burdens. Specialized in Rust, Go, and PostgreSQL internals.",
-    tags: ["Rust", "Go", "Kafka", "Postgres", "Raft"],
+      "maya-nvim started as a place for my editor config. It now has its own installer, optional local AI, and a separate place for personal settings. I still want it to feel familiar when I open a file.",
+    tags: ["Neovim", "Lua", "LSP"],
   },
   {
-    label: "embedded_retro",
-    icon: "gamepad",
-    title: "Low-Level & Handheld Homebrew",
+    label: "desktop_dots",
+    icon: "laptop",
+    title: "A desktop that matches",
     description:
-      "Porting indie engines and writing custom audio pipeline drivers for PlayStation Vita (ARM Cortex-A9) and Game Boy Advance. Bare-metal reverse engineering, cycle-accurate timing, and DMA buffer hacking.",
-    tags: ["C / C++", "ARM ASM", "VitaSDK", "DMA", "GBA"],
+      "My dotfiles connect Hyprland, Waybar, Kitty, launchers, and the shell. The palette is shared, but each app keeps its own layout. Cream paper in Light, warm charcoal in Dark, pink in both.",
+    tags: ["Hyprland", "Python", "CSS"],
   },
   {
-    label: "local_ml_eng",
+    label: "local_ai",
     icon: "chip",
-    title: "Local AI & Metal Compute",
+    title: "Small models, useful context",
     description:
-      "Running fine-tuned 8B/14B parameter LLMs locally without cloud dependencies. Writing custom Metal Performance Shaders (MPS), quantized 4-bit tensor kernels, and private context retrieval mechanisms.",
-    tags: ["Metal (MPS)", "llama.cpp", "MLX", "PyTorch"],
+      "I'm working on local completions and next-edit suggestions in mvim. Cursortab and Ollama do the inference; my Lua code gathers nearby type information from the language server.",
+    tags: ["Ollama", "Cursortab", "LSP"],
   },
 ];
 export const now = [
-  "Debugging dual-framebuffer tearing on a custom PS Vita homebrew audio visualizer.",
-  "Sipping iced oat vanilla lattes and listening to ’90s ambient jungle / intelligent DnB.",
-  "Refining personal Neovim autocommands for zero-lag markdown previews.",
-  "Cuddling my 100cm giant Blåhaj shark while running test suites.",
+  "Working on type-aware local AI suggestions in mvim.",
+  "Keeping Maya Light/Dark consistent across the desktop and editor.",
+  "Making the configs easier to install, update, and make your own.",
+  "Writing notes about the small things that took longer than expected.",
 ];
 export const projectCards = [
-  interests[1],
-  interests[2],
-  { ...hardware[2], label: "editor_tools", tags: ["Lua", "Neovim", "mvim"] },
+  {
+    id: "mvim",
+    label: "maya-nvim",
+    icon: "terminal",
+    title: "maya-nvim / mvim",
+    description:
+      "My standalone Neovim setup for Linux and macOS. An installer, language tooling, local AI, folder sessions, and personal overrides in ~/.config/mvim/.",
+    tags: ["Lua", "Neovim", "Ollama"],
+    links: [
+      { href: repositories.nvim, label: "GitHub" },
+      { href: "/blog/maya-nvim", label: "Read the article" },
+    ],
+  },
+  {
+    id: "dotfiles",
+    label: "maya-dotfiles",
+    icon: "laptop",
+    title: ".maya-dotfiles",
+    description:
+      "My Hyprland desktop and terminal configs. Paper colors, pastels, a shared Light/Dark palette, symlinked configs, and scripts for applying and repairing the setup.",
+    tags: ["Hyprland", "Kitty", "Python"],
+    links: [
+      { href: repositories.dotfiles, label: "GitHub" },
+      { href: "/blog/maya-dotfiles", label: "Read the article" },
+    ],
+  },
+  {
+    id: "local-ai",
+    label: "local-ai",
+    icon: "chip",
+    title: "Local AI in mvim",
+    description:
+      "The AI side of maya-nvim: Cursortab, Ollama, and a bounded cache of LSP hints. One local model handles completions and next edits; cloud providers stay opt-in.",
+    tags: ["Cursortab", "Ollama", "Lua"],
+    links: [
+      {
+        href: repositories.nvim + "/blob/master/lua/maya/ai_context.lua",
+        label: "Context collector",
+      },
+      { href: "/blog/local-ai-in-mvim", label: "Read the article" },
+    ],
+  },
 ];
-
-export const projectLinks = [
-  { id: "handheld-homebrew", label: "handheld-homebrew" },
-  { id: "local-ai", label: "local-ai" },
-  { id: "mvim", label: "mvim" },
-] as const;
+export const projectLinks = projectCards.map(({ id, label }) => ({
+  id,
+  label,
+}));

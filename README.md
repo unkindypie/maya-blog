@@ -16,7 +16,7 @@ Open [localhost:3000](http://localhost:3000). MDX edits reload automatically.
 
 ## Writing
 
-Edit `content/projects.mdx` and `content/dotfiles.mdx` for the main documents. Home and About render the shared profile in `ui/components/profile-page.tsx`; edit the profile, hardware, and navigation data in `lib/site-content.ts`. The first blog post is starter text to make your own before publishing.
+Edit `content/projects.mdx` and `content/dotfiles.mdx` for the main documents. Home and About render the shared profile in `ui/components/profile-page.tsx`; edit the profile, hardware, and navigation data in `lib/site-content.ts`. Blog posts cover maya-nvim, .maya-dotfiles, and local AI in mvim. The About profile and tool descriptions are based on the local configs reviewed for these articles; update them when your setup changes.
 
 Add a file such as `content/blog/my-post.mdx`:
 
