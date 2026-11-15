@@ -1,0 +1,31 @@
+{
+  "version": "0.2",
+  "language": "en,en-GB",
+  "files": [
+    "{app,content,lib,ui,scripts,tests,docs}/**/*.{md,mdx,css,js,mjs,cjs,ts,tsx,mts,json,yaml,yml}",
+    "*.{md,json,mjs,mts,yaml,yml}",
+    ".github/**/*.{yml,yaml}",
+    ".husky/install.mjs",
+    ".agents/skills/dependency-audit/**/*.{md,yaml}",
+    ".husky/pre-commit"
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    ".next/**",
+    "out/**",
+    "build/**",
+    "coverage/**",
+    "pnpm-lock.yaml",
+    "next-env.d.ts",
+    ".husky/_/**"
+  ],
+  "ignoreRegExpList": ["/\\b(?:GHSA-[a-z0-9-]+|CVE-\\d{4}-\\d+)\\b/gi"],
+  "dictionaryDefinitions": [
+    {
+      "name": "project-words",
+      "path": "./.cspell/project-words.txt",
+      "addWords": true
+    }
+  ],
+  "dictionaries": ["project-words"]
+}

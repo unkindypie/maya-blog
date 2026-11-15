@@ -8,10 +8,10 @@ Maya writes her articles and about info in her own style, simple not very AI'ish
 
 ## Website look style:
 
-- Modern, simplistic, utilitary but Y2K styled.
+- Modern, simplistic, utilitarian but Y2K styled.
 - Imagine Windows 95 UI, old Macintosh UI. Feel it.
 - A bit girly. Maya is a girl after all.
-- Geeky. Maya gonna put her expiriences on porting Nintendo games to PS Vita, her messing around with her local AI and Neovim tooling.
+- Geeky. Maya gonna put her experiences on porting Nintendo games to PS Vita, her messing around with her local AI and Neovim tooling.
 - Darker, more minimalistic, less visual.
 
 ## Project Structure
@@ -47,7 +47,7 @@ Maya writes her articles and about info in her own style, simple not very AI'ish
 
 ### Match developer IDE tools:
 
-- Make sure linters, typecheckers and formaters setting match developer's. Developer uses mvim (~/maya-nvim/ has core nvim configuration, ~/.config/mvim/init.lua has personal configuration. If changes to developer's configs are required stop the task and ask for approval of developer).
+- Make sure linters, type checkers and formatters setting match developer's. Developer uses mvim (~/maya-nvim/ has core nvim configuration, ~/.config/mvim/init.lua has personal configuration. If changes to developer's configs are required stop the task and ask for approval of developer).
 
 * Feel free to configure project's linters, typescript errors.
 
@@ -58,6 +58,7 @@ Maya writes her articles and about info in her own style, simple not very AI'ish
 - Run `pnpm format` before finishing code changes unless the user says otherwise. If command not present configure it.
 - Run `pnpm format:md` before finishing Markdown changes unless the user says otherwise. If command not present configure it.
 - Run `pnpm lint` before finishing code changes unless the user says otherwise.
+- Run `pnpm spellcheck` before committing. Add legitimate tool/project names to `.cspell/project-words.txt`; fix real spelling errors rather than adding them to the dictionary. Husky enforces this command before commits.
 - Use `pnpm lint:changed` for quick checks on touched JS/TS files (must be warning-free). If command not present configure it.
 - Run `pnpm typecheck` when you change types or shared libs.
 - Do not introduce new lint warnings in files you touch. Fix existing warnings in touched files when feasible (Boy Scout).
@@ -85,7 +86,7 @@ Maya writes her articles and about info in her own style, simple not very AI'ish
 
 - Shared UI library: keep `ui/components` directory for shared UI components.
 - Keep page prose and page-specific card/spec content in `content/*.mdx`. Shared components receive that content through props or children; do not hide page copy in component implementations or a global TypeScript content file.
-- Responsive layout: Ensure site looks good on all devices - Desktop, Portait, Mobile.
+- Responsive layout: Ensure site looks good on all devices - Desktop, Portrait, Mobile.
 - React Query: If you developed a new API (API route or a server-action) and need to use it (get something, create something) - wrap into React Query query or mutation.
 - Track loading states of react queries via toast notifications (install any library if needed). If it was called by button, show spinner loading indicator inside that button title to track isLoading state.
 - Track and show validation errors. If needed a form use formik for validation and implement formik compatible ui library (input components which can use state of formik to show related field info, show errors and get its value and on change handlers).
@@ -93,7 +94,7 @@ Maya writes her articles and about info in her own style, simple not very AI'ish
 ### Markdown / Page Content:
 
 - Keep most of the text in .mdx, use components only if native Nextra / mapping of Nextra via config can't solve it.
-- Don't ass mostly empty page with a title and a component which shows everything. Pages musst be easily editable from .mdx.
+- Don't add a mostly empty page with a title and a component which shows everything. Pages must be easily editable from .mdx.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

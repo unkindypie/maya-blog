@@ -9,3 +9,6 @@ next-env.d.ts
 .agents/skills/
 
 .stitch/designs/
+
+# Generated Husky hook launchers.
+.husky/_/

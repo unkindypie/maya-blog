@@ -4,7 +4,7 @@ A small personal site built with Next.js 16 and Nextra 4. MDX for writing, a dar
 
 ## Local development
 
-Use Node.js 22.12+ and pnpm 10.33.0 (pinned in `package.json`).
+Use Node.js 22.18+ and pnpm 10.33.0 (pinned in `package.json`).
 
 ```sh
 corepack enable
@@ -56,6 +56,7 @@ Global metadata lives in `app/layout.tsx`, navigation in `ui/components/site-nav
 | `pnpm format`       | Format project files with Prettier                            |
 | `pnpm format:md`    | Format Markdown and MDX                                       |
 | `pnpm format:check` | Check formatting without writing                              |
+| `pnpm spellcheck`   | Check spelling in source, content, docs, and configuration    |
 | `pnpm lint`         | Lint with no warnings allowed                                 |
 | `pnpm lint:changed` | Lint staged, unstaged, and untracked JS/TS files against HEAD |
 | `pnpm typecheck`    | Generate Next route types and run strict TypeScript           |
@@ -64,6 +65,10 @@ Global metadata lives in `app/layout.tsx`, navigation in `ui/components/site-nav
 | `pnpm check`        | Run formatting, lint, types, and tests                        |
 
 `pnpm audit` checks all installed dependency paths, including development tools; `pnpm audit --prod` checks the production subset. CI runs the full audit. See [the dependency audit report](docs/dependency-audit.md) for security overrides and the two upstream deprecation warnings that remain during dependency resolution. For future checks, invoke `$dependency-audit`; its instructions are installed locally at [`.agents/skills/dependency-audit/SKILL.md`](.agents/skills/dependency-audit/SKILL.md).
+
+`pnpm spellcheck` checks first-party source, MDX, docs, and configuration using CSpell. Both US and British English are accepted. Project and tool names belong in `.cspell/project-words.txt`; fix ordinary typos instead of adding them there. Generated output, lockfiles, binary assets, and imported skills are excluded; the local dependency-audit skill is included explicitly.
+
+`pnpm install` installs Husky's local hooks automatically. The pre-commit hook runs `pnpm spellcheck` against the full working tree and blocks the commit on spelling errors. It does not rewrite or stage files. CI also runs spell checking through `pnpm check`. Hook installation is skipped with `NODE_ENV=production`, `CI=true`, or `HUSKY=0`.
 
 The project uses the same Prettier, ESLint, and TypeScript tools as mvim. Repository configs apply in the editor and CLI; no editor configuration changes are required. Generated output is ignored by formatters and linters. CI runs all checks and the production build on pushes and pull requests.
 
