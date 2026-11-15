@@ -1,15 +1,14 @@
 import Link from "next/link";
 import { getPageMap } from "nextra/page-map";
 import { collectPosts } from "@/lib/posts";
-export const metadata = {
-  title: "blog",
-  description:
-    "Notes on maya-nvim, Linux dotfiles, local AI, and Vita homebrew.",
-};
+import { blogPage, pageMetadata, pageStructuredData } from "@/lib/seo";
+import { StructuredData } from "@/ui/components/structured-data";
+export const metadata = pageMetadata(blogPage);
 export default async function BlogPage() {
   const posts = collectPosts(await getPageMap());
   return (
     <div className="document-page blog-page">
+      <StructuredData data={pageStructuredData(blogPage)} />
       <div className="command-line">
         <span>ls -la ~/maya/blog/</span>
         <small>

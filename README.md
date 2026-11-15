@@ -72,7 +72,7 @@ pnpm build
 pnpm start
 ```
 
-`pnpm build` creates the Next.js production application in `.next/`; `pnpm start` runs it on port 3000. Deploy using Vercel's Next.js preset or a Node.js host running these commands. Static-only hosting and uploading `out/` are no longer supported because ISR needs a server. If the Vercel project has a custom Output Directory of `out`, clear that override so Next.js output is detected automatically. Images remain unoptimized. Search and RSS are not configured.
+`pnpm build` creates the Next.js production application in `.next/`; `pnpm start` runs it on port 3000. Deploy using Vercel's Next.js preset or a Node.js host running these commands. Static-only hosting and uploading `out/` are no longer supported because ISR needs a server. If the Vercel project has a custom Output Directory of `out`, clear that override so Next.js output is detected automatically. Images remain unoptimized. Search is not configured. RSS is available at `/feed.xml`.
 
 ## Public GitHub activity
 
@@ -83,3 +83,15 @@ Next.js caches the GitHub fetch and regenerates the affected pages after 15 minu
 Public data works without a token. On a busy shared host, optionally set `GITHUB_ACTIVITY_TOKEN` in the server/build environment to raise GitHub's API limits. It is never sent to the browser. The query explicitly requests public repositories and results are checked again to exclude private repositories and other authors. No Git authentication credentials are reused. No client-side API request, database, or scheduled job is needed.
 
 Nextra's routing follows its [App Router content API](https://nextra.site/api/importpage). The blog index uses Nextra's generated page map. Unit tests cover post discovery, ordering, and front matter validation; the production build checks that MDX routes can be prerendered. Activity tests cover filtering, sorting, caching options, links, and API failure states.
+
+## Search and sharing metadata
+
+`lib/seo.ts` uses the production origin `https://www.maya-is.engineer`. Each MDX page gets a canonical URL, Open Graph metadata, a large Twitter/X card, and structured data. `/about/` mirrors `/`, so it points to the homepage as its canonical URL and is excluded from the sitemap. Articles include publication dates and breadcrumbs. No modification date is invented: set `updated: "YYYY-MM-DD"` in front matter when a meaningful content update needs to be recorded.
+
+- `/sitemap.xml` discovers published MDX pages and the blog index automatically. An optional `images` front-matter list adds article screenshots to the sitemap.
+- `/robots.txt` allows crawling and advertises the sitemap.
+- `/llms.txt` lists the canonical pages, article descriptions, and project links for AI assistants, following the [llms.txt proposal](https://llmstxt.org/). It is a discovery aid, not a ranking guarantee or a permissions policy. The HTTP `Link` header points to it.
+- `/feed.xml` is an RSS feed of published articles and is advertised in page metadata.
+- `/og/home/`, `/og/blog/`, and `/og/blog/<article>/` generate 1200×630 PNG sharing cards from the same page metadata, using the bundled OFL-licensed JetBrains Mono font. They are prerendered and cached by Next.js, and regenerate on deployment when page copy changes. Optional `socialTitle` and `socialDescription` front matter customize a preview without changing the page title or description.
+
+Use a Next.js host for generated previews as well as ISR. Submit `https://www.maya-is.engineer/sitemap.xml` in Google Search Console or Bing Webmaster Tools when those accounts are connected. Sharing platforms may retain an earlier preview until their cache refreshes.
