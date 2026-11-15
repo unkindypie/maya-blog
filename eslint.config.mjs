@@ -21,6 +21,7 @@ export default defineConfig([
     },
   },
   globalIgnores([
+    ".agents/skills/**",
     ".next/**",
     "out/**",
     "build/**",

@@ -4,3 +4,6 @@ out
 coverage
 pnpm-lock.yaml
 next-env.d.ts
+
+# Upstream agent skills include standalone examples and tools.
+.agents/skills/
