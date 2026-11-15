@@ -22,7 +22,7 @@ Maya writes her articles and about info in her own style, simple not very AI'ish
 - `lib/`: shared content helpers.
 - `tests/`: Vitest tests, mirroring source directories.
 - `scripts/`: development tooling.
-- `out/`: generated static site (ignored by Git).
+- `.next/`: generated Next.js build and ISR cache (ignored by Git).
 
 ## Git Usage:
 

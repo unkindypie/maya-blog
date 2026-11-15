@@ -1,6 +1,6 @@
 # Maya Blog
 
-A small personal site built with Next.js 16 and Nextra 4. MDX for writing, a dark default theme, and a static export for hosting anywhere.
+A small personal site built with Next.js 16 and Nextra 4. MDX for writing, a dark default theme, and server-side regeneration for public GitHub activity.
 
 ## Local development
 
@@ -16,7 +16,7 @@ Open [localhost:3000](http://localhost:3000). MDX edits reload automatically.
 
 ## Writing
 
-Page content lives in MDX. Edit `content/about.mdx` for the profile text, badges, specs, tool cards, interests, current projects, and contact-panel links. The introduction and current-project list are ordinary Markdown inside `ProfileIntro` and `ProfilePanel`; card and spec text is passed as props. The homepage imports that same About MDX, so one edit updates both `/` and `/about/`.
+Page content lives in MDX. Edit `content/about.mdx` for the profile text, badges, specs, tool cards, interests, GitHub activity settings, and contact-panel links. The introduction is ordinary Markdown inside `ProfileIntro`; card and spec text is passed as props. The `/now` panel uses `GitHubActivity` with its username, link label, and fallback copy authored in MDX. The homepage imports that same About MDX, so one edit updates both `/` and `/about/`.
 
 Edit `content/projects.mdx` for project cards and prose, and `content/dotfiles.mdx` for the setup guide and screenshots. `ProfileHero`, `ProfileIntro`, `ProfileSection`, `ProfilePanel`, `QuickSpecs`, `SpecRow`, `InfoCard`, and `ProjectGrid` in `ui/components/` own the markup and styling, not the page copy. Shared navigation, footer contact links, and Explorer project targets remain in `lib/site-content.ts`; match each project card's `id` to its Explorer target when adding or renaming one.
 
@@ -72,6 +72,14 @@ pnpm build
 pnpm start
 ```
 
-`pnpm build` writes the static site to `out/`; `pnpm start` serves it on port 3000. Upload `out/` to a static host that supports directory index files and configure `404.html` as its error page. There is no production Node server. Images are served without Next's server-side optimizer. Search and RSS are not configured.
+`pnpm build` creates the Next.js production application in `.next/`; `pnpm start` runs it on port 3000. Deploy using Vercel's Next.js preset or a Node.js host running these commands. Static-only hosting and uploading `out/` are no longer supported because ISR needs a server. If the Vercel project has a custom Output Directory of `out`, clear that override so Next.js output is detected automatically. Images remain unoptimized. Search and RSS are not configured.
 
-Nextra's routing follows its [App Router content API](https://nextra.site/api/importpage). The blog index uses Nextra's generated page map. Unit tests cover post discovery, ordering, and front matter validation; the production build checks that MDX routes can be exported.
+## Public GitHub activity
+
+The `/now` panel on `/` and `/about/` server-renders the five most recent public commits authored by the configured GitHub username. It uses [GitHub commit search](https://docs.github.com/en/rest/search/search#search-commits), sorted by committer date. Search follows GitHub's index, so newly pushed commits can take time to appear; it is not limited to repositories owned by the account.
+
+Next.js caches the GitHub fetch and regenerates the affected pages after 15 minutes when they are requested. Visitors receive the cached page while revalidation happens in the background. Other MDX pages stay prerendered. The request has an eight-second timeout; an empty account or unavailable API gets an editable fallback with a GitHub profile link.
+
+Public data works without a token. On a busy shared host, optionally set `GITHUB_ACTIVITY_TOKEN` in the server/build environment to raise GitHub's API limits. It is never sent to the browser. The query explicitly requests public repositories and results are checked again to exclude private repositories and other authors. No Git authentication credentials are reused. No client-side API request, database, or scheduled job is needed.
+
+Nextra's routing follows its [App Router content API](https://nextra.site/api/importpage). The blog index uses Nextra's generated page map. Unit tests cover post discovery, ordering, and front matter validation; the production build checks that MDX routes can be prerendered. Activity tests cover filtering, sorting, caching options, links, and API failure states.

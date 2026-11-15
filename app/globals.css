@@ -1229,3 +1229,39 @@ h3 {
     font-size: 14px;
   }
 }
+
+.github-activity li > a {
+  flex: 1;
+  min-width: 0;
+  padding-bottom: 10px;
+}
+.activity-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+  color: var(--dim);
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+.activity-meta time {
+  white-space: nowrap;
+}
+.activity-message {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  color: var(--muted);
+}
+.github-activity a:hover .activity-message {
+  color: var(--primary-bright);
+}
+.activity-profile {
+  font-size: 11px;
+}
+.activity-empty {
+  margin-bottom: 16px;
+  color: var(--muted);
+}

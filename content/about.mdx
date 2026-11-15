@@ -14,6 +14,7 @@ import {
 } from "@/ui/components/profile-panels";
 import { QuickSpecs, SpecRow } from "@/ui/components/quick-specs";
 import { InfoCard } from "@/ui/components/info-card";
+import { GitHubActivity } from "@/ui/components/github-activity";
 
 <ProfilePage>
 
@@ -135,7 +136,7 @@ I use Fedora 44 with Hyprland, Kitty, zsh, and tmux. My editor is mvim, my own N
 <InfoCard
   label="vita_homebrew"
   icon="gamepad"
-  title="Ocarina of Time, on my Vita"
+  title="Zelda Ocarina of Time, on my PS Vita"
   description="The Switch 2 remake got me wanting prettier OoT models and textures on my Vita too. I'm updating the older Ship of Harkinian port toward desktop-style mod support, using Djipi's 3DS Experience as the starting point."
   tags={["PS Vita", "C++", "Ship of Harkinian"]}
   links={[{ href: "/blog/oot-vita-modding", label: "Read the story" }]}
@@ -145,15 +146,14 @@ I use Fedora 44 with Hyprland, Kitty, zsh, and tmux. My editor is mvim, my own N
 
 <ProfilePanels>
 
-<ProfilePanel variant="now" title="/now" icon="◷" note="things in progress">
+<ProfilePanel variant="now" title="/now" icon="◷" note="recent public commits">
 
-- Working on original-mod loading in the Vita Ship of Harkinian port.
-- Working on type-aware local AI suggestions in mvim.
-- Keeping Maya Light/Dark consistent across the desktop and editor.
-- Making the configs easier to install, update, and make your own.
-- Writing notes about the small things that took longer than expected.
-
-<ProfileLink href="/blog" label="Read my notes" />
+<GitHubActivity
+  username="unkindypie"
+  emptyText="No public commits to show yet."
+  unavailableText="GitHub is taking a break. You can still find my latest work there."
+  linkLabel="More on GitHub"
+/>
 
 </ProfilePanel>
 
