@@ -88,6 +88,11 @@ Maya writes her articles and about info in her own style, simple not very AI'ish
 - Track loading states of react queries via toast notifications (install any library if needed). If it was called by button, show spinner loading indicator inside that button title to track isLoading state.
 - Track and show validation errors. If needed a form use formik for validation and implement formik compatible ui library (input components which can use state of formik to show related field info, show errors and get its value and on change handlers).
 
+### Markdown / Page Content:
+
+- Keep most of the text in .mdx, use components only if native Nextra / mapping of Nextra via config can't solve it.
+- Don't ass mostly empty page with a title and a component which shows everything. Pages musst be easily editable from .mdx.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 ## This is NOT the Next.js you know

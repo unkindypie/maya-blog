@@ -31,17 +31,17 @@ export interface SpecRowProps {
   readonly value: string;
   readonly detail?: string;
   readonly href?: string;
-  readonly stacked?: boolean;
+  readonly wide?: boolean;
 }
 export function SpecRow({
   label,
   value,
   detail,
   href,
-  stacked,
+  wide,
 }: Readonly<SpecRowProps>) {
   return (
-    <div className={`spec-row${stacked ? " spec-contact" : ""}`}>
+    <div className={`spec-row${wide ? " spec-wide" : ""}`}>
       <dt>{label}</dt>
       <dd>
         {href ? (

@@ -92,7 +92,7 @@ describe("MDX profile components", () => {
           label="Email"
           value="author@example.com"
           href="mailto:author@example.com"
-          stacked
+          wide
         />
       </QuickSpecs>,
     );

@@ -249,7 +249,7 @@ h3 {
 }
 .profile-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 220px;
+  grid-template-columns: minmax(0, 1fr) 320px;
   gap: 32px;
   padding-bottom: 20px;
 }
@@ -341,6 +341,7 @@ h3 {
   background: color-mix(in srgb, var(--raised) 60%, transparent);
 }
 .quick-specs dt {
+  margin: 0;
   color: var(--secondary);
 }
 .quick-specs .spec-row:nth-child(3n) dt {
@@ -745,7 +746,7 @@ h3 {
     padding: 40px;
   }
   .profile-hero {
-    grid-template-columns: minmax(0, 1fr) 260px;
+    grid-template-columns: minmax(0, 1fr) 320px;
   }
 }
 @media (max-width: 1199px) {
@@ -1112,16 +1113,10 @@ h3 {
   }
 }
 
-.quick-specs .spec-contact {
+.quick-specs .spec-wide {
   grid-column: 1 / -1;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 4px;
 }
-.quick-specs .spec-contact dd {
-  align-items: flex-start;
-  text-align: left;
-}
-.quick-specs .spec-contact .spec-link {
+.quick-specs .spec-wide .spec-link {
   max-width: 100%;
   overflow-wrap: anywhere;
   font-size: 11px;
