@@ -736,17 +736,14 @@ h3 {
 .skip-link:focus {
   top: 12px;
 }
+/* Keep the desktop at the Stitch canvas proportions on larger displays. */
 @media (min-width: 1600px) {
+  html {
+    --desktop-scale: clamp(1, calc(100vw / 1600px), 1.6);
+    zoom: var(--desktop-scale);
+  }
   .workspace {
-    max-width: 1800px;
-    margin-right: auto;
-    padding: 76px 32px 0;
-  }
-  .content-pane {
-    padding: 40px;
-  }
-  .profile-hero {
-    grid-template-columns: minmax(0, 1fr) 320px;
+    min-height: calc(100vh / var(--desktop-scale));
   }
 }
 @media (max-width: 1199px) {
