@@ -2,6 +2,10 @@
 
 A small personal site built with Next.js 16 and Nextra 4. MDX for writing, a dark default theme, and server-side regeneration for public GitHub activity.
 
+Deployed at [maya-is.engineer][https://maya-is.engineer].
+
+Built with tools: Stitch for designing, Codex for implementation. Linting, typechecking, formatting & spell check set up.
+
 ## Local development
 
 Use Node.js 22.18+ and pnpm 10.33.0 (pinned in `package.json`).
