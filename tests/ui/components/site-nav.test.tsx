@@ -15,6 +15,23 @@ describe("SiteNav", () => {
       expect(markup.match(/aria-current="page"/g)).toHaveLength(1);
     },
   );
+  it.each(["tabs", "explorer", "workspaces"] as const)(
+    "links the dotfiles page in %s navigation",
+    (variant) => {
+      current.pathname = "/dotfiles/";
+      const markup = renderToStaticMarkup(<SiteNav variant={variant} />);
+      expect(markup).toMatch(
+        /<a[^>]*aria-current="page"[^>]*href="\/dotfiles"/,
+      );
+      expect(markup.match(/aria-current="page"/g)).toHaveLength(1);
+    },
+  );
+  it("marks About active on the /about alias", () => {
+    current.pathname = "/about/";
+    expect(renderToStaticMarkup(<SiteNav />)).toMatch(
+      /<a[^>]*aria-current="page"[^>]*href="\/"/,
+    );
+  });
   it("does not mark home active on an unknown route", () => {
     current.pathname = "/missing";
     expect(renderToStaticMarkup(<SiteNav />)).not.toContain(

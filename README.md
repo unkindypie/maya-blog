@@ -16,7 +16,7 @@ Open [localhost:3000](http://localhost:3000). MDX edits reload automatically.
 
 ## Writing
 
-Edit `content/index.mdx`, `content/about.mdx`, and `content/projects.mdx` for the main pages. The initial copy and first post are starter text to make your own before publishing.
+Edit `content/projects.mdx` and `content/dotfiles.mdx` for the main documents. Home and About render the shared profile in `ui/components/profile-page.tsx`; edit the profile, hardware, and navigation data in `lib/site-content.ts`. The first blog post is starter text to make your own before publishing.
 
 Add a file such as `content/blog/my-post.mdx`:
 
@@ -32,7 +32,7 @@ Write here. Markdown, fenced code blocks, and React components work.
 
 The filename becomes `/blog/my-post/`. The blog index picks up new posts automatically, newest first. Title and a valid quoted date are required. Every file under `content/blog/` is published; keep unfinished drafts outside that folder. No CMS or database is needed.
 
-Global metadata lives in `app/layout.tsx`, navigation in `ui/components/site-nav.tsx`, and the colors/layout in `app/globals.css`. Shared components belong in `ui/components/`. The site starts in dark mode; the theme switch remembers your light or dark preference.
+Global metadata lives in `app/layout.tsx`, navigation in `ui/components/site-nav.tsx`, and the colors/layout in `app/globals.css`. JetBrains Mono is served locally from `public/fonts/` (OFL license included). Shared components belong in `ui/components/`. The site uses the dark pink/lilac theme from the linked Stitch reference. The desktop taskbar and Explorer become compact navigation and a collapsible drawer on mobile.
 
 ## Development checks
 

@@ -81,6 +81,7 @@ Maya writes her articles and about info in her own style, simple not very AI'ish
 ### Frontend:
 
 - Shared UI library: keep `ui/components` directory for shared UI components.
+- Responsive layout: Ensure site looks good on all devices - Desktop, Portait, Mobile.
 - React Query: If you developed a new API (API route or a server-action) and need to use it (get something, create something) - wrap into React Query query or mutation.
 - Track loading states of react queries via toast notifications (install any library if needed). If it was called by button, show spinner loading indicator inside that button title to track isLoading state.
 - Track and show validation errors. If needed a form use formik for validation and implement formik compatible ui library (input components which can use state of formik to show related field info, show errors and get its value and on change handlers).

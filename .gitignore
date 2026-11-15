@@ -41,3 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 .env
+
+# Downloaded Stitch reference assets (metadata and tokens stay tracked).
+.stitch/designs/
+.agents/skills/**/node_modules/

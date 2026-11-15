@@ -7,3 +7,5 @@ next-env.d.ts
 
 # Upstream agent skills include standalone examples and tools.
 .agents/skills/
+
+.stitch/designs/
