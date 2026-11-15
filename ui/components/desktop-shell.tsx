@@ -3,6 +3,7 @@ import { contact } from "@/lib/site-content";
 import type { Post } from "@/lib/posts";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { SiteNav } from "./site-nav";
 import { SystemIcon } from "./system-icon";
@@ -16,8 +17,8 @@ export function DesktopShell({ children, posts }: Readonly<DesktopShellProps>) {
     <div className="desktop-shell">
       <header className="taskbar">
         <div className="workspace-switcher">
-          <Link href="/" className="cat-logo" aria-label="Maya home">
-            ฅ
+          <Link href="/" className="cat-logo not-prose" aria-label="Maya home">
+            <Image src="/maya-cat.svg" alt="" width={28} height={28} />
           </Link>
           <SiteNav variant="workspaces" />
         </div>

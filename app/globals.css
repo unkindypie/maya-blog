@@ -89,13 +89,17 @@ summary {
   gap: 12px;
 }
 .cat-logo {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   display: grid;
   place-items: center;
   color: var(--primary);
-  font-size: 28px;
-  line-height: 1;
+  background: var(--panel);
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+.cat-logo:hover {
+  background: var(--raised);
 }
 .site-nav {
   display: flex;
@@ -794,7 +798,13 @@ h3 {
     gap: 0;
   }
   .cat-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+  .cat-logo img {
     width: 24px;
+    height: 24px;
   }
   .desktop-shell > .explorer {
     display: none;
