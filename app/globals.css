@@ -683,10 +683,15 @@ h3 {
 }
 .post-list {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
   gap: 12px;
   align-content: start;
 }
 .post-card {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
   background: var(--panel);
   padding: 16px;
   border-radius: 4px;
