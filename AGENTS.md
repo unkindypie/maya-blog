@@ -29,8 +29,9 @@ Maya writes her articles and about info in her own style, simple not very AI'ish
 - After completing each task, run the required checks and create a local Git commit before reporting completion, unless the user explicitly asks not to commit.
 - Commit the user’s pending changes together with your own changes. Never skip or leave user changes uncommitted unless the user explicitly asks you to exclude them.
 - Use separate commits for independently completed tasks (for example, project setup and skill installation), while including any pending user changes in the next commit.
-- Never commit secrets or generated build output. Do not push unless requested.
-- If a required check or commit fails, fix it when possible and report any remaining blocker rather than claiming completion.
+- After every commit, push the current branch to this project’s existing remote before reporting completion, unless the user explicitly asks not to push. Never force-push unless explicitly authorized.
+- Never commit secrets or generated build output.
+- If a required check, commit, or push fails, fix it when possible and report any remaining blocker rather than claiming completion.
 
 ### Use prefixes for commit messages:
 
