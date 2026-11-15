@@ -48,7 +48,7 @@ export function DesktopShell({ children, posts }: Readonly<DesktopShellProps>) {
         <footer className="system-footer">
           <span>© {new Date().getFullYear()} Maya</span>
           <span>
-            <a href={contact.github}>GitHub / unkindypie</a> · maya.os{" "}
+            <a href={contact.github}>GitHub / unkindypie</a> · maya-is.engineer{" "}
             <span className="status-dot">●</span>
           </span>
         </footer>
