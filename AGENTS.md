@@ -27,8 +27,8 @@ Maya writes her articles and about info in her own style, simple not very AI'ish
 ## Git Usage:
 
 - After completing each task, run the required checks and create a local Git commit before reporting completion, unless the user explicitly asks not to commit.
-- Keep commits scoped to the task. Stage explicit paths and leave unrelated user changes out of the commit.
-- Use separate commits for independently completed tasks (for example, project setup and skill installation).
+- Commit the user’s pending changes together with your own changes. Never skip or leave user changes uncommitted unless the user explicitly asks you to exclude them.
+- Use separate commits for independently completed tasks (for example, project setup and skill installation), while including any pending user changes in the next commit.
 - Never commit secrets or generated build output. Do not push unless requested.
 - If a required check or commit fails, fix it when possible and report any remaining blocker rather than claiming completion.
 

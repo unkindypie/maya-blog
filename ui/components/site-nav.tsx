@@ -12,6 +12,7 @@ const links = [
 
 export function SiteNav() {
   const pathname = usePathname().replace(/\/$/, "") || "/";
+
   return (
     <nav aria-label="Main navigation">
       {links.map(([href, label]) => (
