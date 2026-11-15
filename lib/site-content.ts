@@ -27,7 +27,7 @@ export const profile = {
   intro:
     "I like making my tools feel like mine. Most of that ends up in my Neovim config, my Linux desktop, and little scripts that make the two get along.",
   detail:
-    "I use Fedora 44 with Hyprland, Kitty, zsh, and tmux. My editor is mvim, my own Neovim setup. Lately I've been working on local AI suggestions, keeping desktop themes in sync, and writing down the bits I don't want to figure out twice. Handheld homebrew and Nintendo-to-Vita experiments belong here too, when I have something to share.",
+    "I use Fedora 44 with Hyprland, Kitty, zsh, and tmux. My editor is mvim, my own Neovim setup. Lately I've been working on local AI suggestions, keeping desktop themes in sync, and writing down the bits I don't want to figure out twice. I'm also working on the Vita port of Ship of Harkinian: bringing desktop-style mod support to Ocarina of Time so I can use nicer models and textures, starting with Djipi's 3DS Experience.",
 };
 export interface SystemSpec {
   readonly label: string;
@@ -102,8 +102,18 @@ export const interests = [
       "I'm working on local completions and next-edit suggestions in mvim. Cursortab and Ollama do the inference; my Lua code gathers nearby type information from the language server.",
     tags: ["Ollama", "Cursortab", "LSP"],
   },
+  {
+    label: "vita_homebrew",
+    icon: "gamepad",
+    title: "Ocarina of Time, on my Vita",
+    description:
+      "The Switch 2 remake got me wanting prettier OoT models and textures on my Vita too. I'm updating the older Ship of Harkinian port toward desktop-style mod support, using Djipi's 3DS Experience as the starting point.",
+    tags: ["PS Vita", "C++", "Ship of Harkinian"],
+    links: [{ href: "/blog/oot-vita-modding", label: "Read the story" }],
+  },
 ];
 export const now = [
+  "Working on original-mod loading in the Vita Ship of Harkinian port.",
   "Working on type-aware local AI suggestions in mvim.",
   "Keeping Maya Light/Dark consistent across the desktop and editor.",
   "Making the configs easier to install, update, and make your own.",
@@ -150,6 +160,19 @@ export const projectCards = [
         label: "Context collector",
       },
       { href: "/blog/local-ai-in-mvim", label: "Read the article" },
+    ],
+  },
+  {
+    id: "oot-mods",
+    label: "oot-mods",
+    icon: "gamepad",
+    title: "Ship of Harkinian Mods / Vita",
+    description:
+      "Updating the older Vita OoT port toward the mod support I wanted from desktop SoH. Work on textures, models, resource loading, and memory use, inspired by Djipi's 3DS Experience. Original-archive compatibility is still in progress.",
+    tags: ["PS Vita", "C++", "Ocarina of Time"],
+    links: [
+      { href: "/blog/oot-vita-modding", label: "Read the article" },
+      { href: "https://gamebanana.com/mods/477979", label: "Mod inspiration" },
     ],
   },
 ];

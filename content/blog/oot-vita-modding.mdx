@@ -1,0 +1,73 @@
+---
+title: "OoT on Vita: I just wanted prettier models"
+date: "2026-11-13"
+description: Updating the older Vita Ship of Harkinian port toward desktop-style mod support, starting with Djipi's 3DS Experience.
+---
+
+The [new Ocarina of Time remake on Switch 2](https://www.nintendo.com/us/whatsnew/its-time-experience-the-legend-of-zelda-ocarina-of-time-reborn-exclusively-for-nintendo-switch-2/) got me thinking about playing OoT again. Then I started looking at my Vita.
+
+I wasn't trying to put the Switch game on it. I wanted the OoT port I already had to look nicer: better models, nicer textures, something closer to the look of the 3DS version.
+
+That led me to [Djipi's 3DS Experience and Skilar's Art Plus Link mod](https://gamebanana.com/mods/477979) for Ship of Harkinian. Exactly the sort of thing I wanted. Except the Vita port was on older SoH code, and the desktop-style mod support I needed wasn't there.
+
+So, naturally, this became a project.
+
+## the goal was simple enough
+
+Ship of Harkinian brings Ocarina of Time to other platforms. My work builds on [Rinnegatamante's Vita port](https://github.com/Rinnegatamante/Shipwright). I wanted to update its mod compatibility so those desktop graphics packs could work on the handheld too.
+
+In my head, this was going to be mostly about loading some replacement textures and models. The actual work became resource formats, XML importers, skeletons, renderer assumptions, and finding out what the Vita was really drawing.
+
+I keep the local project in `oot-mods`. There isn't a public source repo or a download release for my changes yet.
+
+## a texture isn't just a picture
+
+The first experiments used converted resources. Reducing replacements to the base game's texture dimensions and formats gave me a working native-resource path. A title logo that rendered differently with the mod enabled was a useful first check.
+
+But that wasn't the end result I wanted. Native-size textures lose the detail that made me want the pack in the first place, and changing texture paths doesn't make a custom player model understand an older skeleton format.
+
+Keeping the original-quality images exposed another problem: the renderer needed more than the pixel pointer. It needed the right dimensions, format, and identity too. Some UI paths copied data into fixed-size buffers or lost that metadata before the draw happened. Fonts and faces made those assumptions very visible.
+
+That is a fairly long way from “drop a texture pack in a folder.”
+
+## models brought their own problems
+
+Replacement skeletons could use a different layout from the one an actor expected. Normal and Flex skeletons don't have the same matrix-handling requirements. Null limbs, hierarchy, and the lifetime of the loaded resources mattered as well.
+
+Materials needed attention too. Some referenced palettes even though the actual replacement images were already RGBA. The useful fix was to handle cases I could prove were safe, rather than invent missing palette data and hope the result looked right.
+
+This is also why I don't describe the work as support for every desktop SoH mod. A pack can depend on engine features the older Vita code simply doesn't have.
+
+## sometimes the game was drawing the same thing seven times
+
+One of the more satisfying finds was in Hyrule Field. The replacement data included seven complete copies of the same field model under different resource names, while the old room header still referenced each entry as a separate chunk.
+
+Drawing them all added a lot of work without adding detail.
+
+The guarded fix keeps one canonical opaque model and combines the relevant bounds. Translucent paths need separate care; removing repeated blended draws can change the result. This wasn't a reason to simplify all the geometry or shrink every texture. It was a reason to inspect the room graph.
+
+## from a converted pack to original archives
+
+The converted baseline let me test compatible textures, scenery, and player-model work on the actual Vita. It also gave me something to compare against while changing the engine.
+
+The next step is moving that compatibility work into C++ so the user can load supported original mod archives without running a desktop conversion script first.
+
+That needs a resource catalog with predictable archive priority, consistent name and hash lookup, and adapters for the formats this older engine expects. It also needs careful ownership: a texture cache can't free pixels while an old C pointer still points at them.
+
+The original-archive build has its own app identity and writable data directory. Keeping it separate from the working installation makes testing and rollback much less stressful.
+
+## November 15 update: what has actually been tested
+
+There are two different stages here. The earlier converted baseline has physical-Vita checks for scenery, models, UI, and transitions along tested routes. Those results aren't a whole-game compatibility guarantee.
+
+The newer, converter-free build has rendered the original title image, young Link and equipment in the house, and textures, HUD, and minimap in Kokiri Forest using original archives. That's progress I can point to, but it doesn't establish support for every scenery or model component.
+
+Room adaptation, broader skeleton and material checks, cache eviction on hardware, and independent mod packs still need work. I'm also keeping render FPS separate from game-logic speed when testing; a bigger number in the overlay isn't enough if the game itself slows down.
+
+## still chasing the same thing
+
+The goal hasn't really changed. I want to play OoT on my Vita with the models and textures that made me click on the mod page.
+
+This is a compatibility project built on other people's work. The graphics pack belongs to its authors; the link above goes to their page. This article doesn't bundle game data, mod assets, or a ready-to-install pack.
+
+I'll write more when there's a clearer compatibility matrix and a build I can actually hand to someone else. For now, a small graphics wish has turned into a lot of time in an older renderer. I can't say I'm surprised.

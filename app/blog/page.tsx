@@ -3,7 +3,8 @@ import { getPageMap } from "nextra/page-map";
 import { collectPosts } from "@/lib/posts";
 export const metadata = {
   title: "blog",
-  description: "Notes on maya-nvim, Linux dotfiles, and local AI.",
+  description:
+    "Notes on maya-nvim, Linux dotfiles, local AI, and Vita homebrew.",
 };
 export default async function BlogPage() {
   const posts = collectPosts(await getPageMap());
@@ -19,8 +20,8 @@ export default async function BlogPage() {
         blog<span className="cursor">_</span>
       </h1>
       <p className="page-intro">
-        My editor, my desktop, and the little things I spent too long debugging.
-        Notes from maya-nvim and .maya-dotfiles.
+        My editor, my desktop, Vita homebrew, and the little things I spent too
+        long debugging. Notes from my pet projects.
       </p>
       <div className="blog-layout">
         <aside className="blog-directory">
@@ -32,6 +33,8 @@ export default async function BlogPage() {
             Local AI
             <br />
             Desktop dotfiles
+            <br />
+            Vita homebrew
             <br />
             Config notes
           </p>

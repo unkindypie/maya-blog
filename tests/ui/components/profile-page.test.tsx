@@ -55,7 +55,12 @@ describe("ProjectGrid", () => {
       expect(markup).toContain(`id="${project.id}"`);
     for (const repo of ["maya-nvim", ".maya-dotfiles"])
       expect(markup).toContain(`href="https://github.com/unkindypie/${repo}"`);
-    for (const slug of ["maya-nvim", "maya-dotfiles", "local-ai-in-mvim"])
+    for (const slug of [
+      "maya-nvim",
+      "maya-dotfiles",
+      "local-ai-in-mvim",
+      "oot-vita-modding",
+    ])
       expect(markup).toContain(`href="/blog/${slug}"`);
   });
 });

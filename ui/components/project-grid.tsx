@@ -5,7 +5,7 @@ export interface ProjectGridProps {
 }
 export function ProjectGrid({ className = "" }: Readonly<ProjectGridProps>) {
   return (
-    <div className={`interests-grid ${className}`}>
+    <div className={`interests-grid project-grid ${className}`}>
       {projectCards.map((card) => (
         <InfoCard key={card.id} {...card} />
       ))}
