@@ -551,19 +551,50 @@ h3 {
   color: var(--primary);
 }
 .document-page {
-  max-width: 1000px;
-  margin: auto;
+  max-width: 1100px;
+  margin: 0;
+  padding: 0;
+}
+.document-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.document-header h1 {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.25;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+.document-eyebrow {
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--tertiary);
+}
+.document-description {
+  font-size: 16px;
+  line-height: 1.625;
+  color: var(--muted);
 }
 .document-page > h1 {
   margin-bottom: 16px;
+  font-weight: 400;
 }
 .markdown-body {
-  margin-top: 24px;
-  line-height: 1.85;
-  color: var(--muted);
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.625;
+  color: var(--foreground);
 }
 .markdown-body > :is(p, ul, ol, pre, table, blockquote) {
   margin-bottom: 20px;
+}
+.markdown-body > :last-child {
+  margin-bottom: 0;
 }
 .markdown-body h2 {
   margin: 32px 0 16px;
@@ -627,6 +658,8 @@ h3 {
   color: var(--secondary);
 }
 .page-intro {
+  font-size: 16px;
+  line-height: 1.625;
   color: var(--muted);
   margin-bottom: 32px;
 }
@@ -1111,4 +1144,92 @@ h3 {
   max-width: 100%;
   overflow-wrap: anywhere;
   font-size: 11px;
+}
+
+/* The Stitch document pane starts beside Explorer, without a second inner window. */
+.workspace:has(.document-page) {
+  padding: 72px 16px 0;
+  max-width: none;
+  margin-right: 0;
+}
+#content:has(.document-page) {
+  padding: 20px;
+  background: var(--background);
+}
+.content-pane:has(> .document-page) {
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.document-page .article-meta {
+  padding: 0;
+  margin-top: 12px;
+  background: transparent;
+  color: var(--dim);
+  font-size: 11px;
+  line-height: 16px;
+  gap: 16px;
+}
+.document-page .article-meta span {
+  color: inherit;
+}
+.document-page .markdown-body h2 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.document-page .markdown-body h3 {
+  font-size: 18px;
+  line-height: 1.5;
+}
+.document-page .markdown-body :is(p, li, blockquote) {
+  font-size: inherit;
+  line-height: inherit;
+}
+.document-page .markdown-body :is(ul, ol) {
+  padding-left: 24px;
+}
+.markdown-body figure {
+  margin: 24px 0;
+}
+.markdown-body figure > a {
+  display: block;
+}
+.markdown-body figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.markdown-body figcaption {
+  margin-top: 8px;
+  color: var(--dim);
+  font-size: 12px;
+  line-height: 1.5;
+}
+@media (max-width: 767px) {
+  .workspace:has(.document-page) {
+    padding: 12px;
+  }
+  #content:has(.document-page) {
+    padding: 16px;
+  }
+  .document-header h1,
+  .document-page > h1 {
+    font-size: 26px;
+    line-height: 1.3;
+  }
+  .document-page .markdown-body h2 {
+    font-size: 21px;
+  }
+  .document-description,
+  .markdown-body {
+    font-size: 15px;
+  }
+}
+
+.markdown-body > * + * {
+  margin-top: 20px;
 }

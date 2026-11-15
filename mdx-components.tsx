@@ -7,29 +7,33 @@ export interface PageContentProps {
     title?: string;
     date?: string;
     fullWidth?: boolean;
+    description?: string | null;
+    category?: string | null;
   };
 }
 function PageContent({ children, metadata }: Readonly<PageContentProps>) {
   if (metadata.fullWidth) return children;
+  const isArticle = Boolean(metadata.date);
   return (
-    <div className="document-page">
-      <div className="command-line">
-        <span>
-          cat ~/maya/{metadata.date ? "blog/" : ""}
-          {metadata.title?.replaceAll(" ", "-")}.md
-        </span>
-        <small>{metadata.date ? "published" : "read-only"}</small>
-      </div>
-      <h1>{metadata.title}</h1>
+    <article className={`document-page${isArticle ? " article-page" : ""}`}>
+      <header className="document-header">
+        <p className="document-eyebrow">
+          <span aria-hidden="true">#</span>{" "}
+          {metadata.category ?? (isArticle ? "notes / maya" : "~/maya/")}
+        </p>
+        <h1>{metadata.title}</h1>
+        {metadata.description && (
+          <p className="document-description">{metadata.description}</p>
+        )}
+      </header>
       {metadata.date && (
-        <div className="frontmatter">
-          <span>date:</span>{" "}
+        <div className="frontmatter article-meta">
           <time dateTime={metadata.date}>{metadata.date.slice(0, 10)}</time>
-          <span>author:</span> Maya
+          <span>by Maya</span>
         </div>
       )}
       <div className="markdown-body">{children}</div>
-    </div>
+    </article>
   );
 }
 const components = getThemeComponents({ wrapper: PageContent });
