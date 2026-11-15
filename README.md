@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Maya Blog
 
-## Getting Started
+A small personal site built with Next.js 16 and Nextra 4. MDX for writing, a dark default theme, and a static export for hosting anywhere.
 
-First, run the development server:
+## Local development
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
+Use Node.js 22.12+ and pnpm 10.33.0 (pinned in `package.json`).
+
+```sh
+corepack enable
+pnpm install --frozen-lockfile
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [localhost:3000](http://localhost:3000). MDX edits reload automatically.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Writing
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Edit `content/index.mdx`, `content/about.mdx`, and `content/projects.mdx` for the main pages. The initial copy and first post are starter text to make your own before publishing.
 
-## Learn More
+Add a file such as `content/blog/my-post.mdx`:
 
-To learn more about Next.js, take a look at the following resources:
+```mdx
+---
+title: a thing I figured out
+date: "2026-11-15"
+description: A short description for the blog index.
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Write here. Markdown, fenced code blocks, and React components work.
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The filename becomes `/blog/my-post/`. The blog index picks up new posts automatically, newest first. Title and a valid quoted date are required. Every file under `content/blog/` is published; keep unfinished drafts outside that folder. No CMS or database is needed.
 
-## Deploy on Vercel
+Global metadata lives in `app/layout.tsx`, navigation in `ui/components/site-nav.tsx`, and the colors/layout in `app/globals.css`. Shared components belong in `ui/components/`. The site starts in dark mode; the theme switch remembers your light or dark preference.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Development checks
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Command             | Purpose                                                       |
+| ------------------- | ------------------------------------------------------------- |
+| `pnpm format`       | Format project files with Prettier                            |
+| `pnpm format:md`    | Format Markdown and MDX                                       |
+| `pnpm format:check` | Check formatting without writing                              |
+| `pnpm lint`         | Lint with no warnings allowed                                 |
+| `pnpm lint:changed` | Lint staged, unstaged, and untracked JS/TS files against HEAD |
+| `pnpm typecheck`    | Generate Next route types and run strict TypeScript           |
+| `pnpm test`         | Run Vitest tests                                              |
+| `pnpm test:watch`   | Watch tests while editing                                     |
+| `pnpm check`        | Run formatting, lint, types, and tests                        |
+
+The project uses the same Prettier, ESLint, and TypeScript tools as mvim. Repository configs apply in the editor and CLI; no editor configuration changes are required. Generated output is ignored by formatters and linters. CI runs all checks and the production build on pushes and pull requests.
+
+## Build and preview
+
+```sh
+pnpm build
+pnpm start
+```
+
+`pnpm build` writes the static site to `out/`; `pnpm start` serves it on port 3000. Upload `out/` to a static host that supports directory index files and configure `404.html` as its error page. There is no production Node server. Images are served without Next's server-side optimizer. Search and RSS are not configured.
+
+Nextra's routing follows its [App Router content API](https://nextra.site/api/importpage). The blog index uses Nextra's generated page map. Unit tests cover post discovery, ordering, and front matter validation; the production build checks that MDX routes can be exported.
