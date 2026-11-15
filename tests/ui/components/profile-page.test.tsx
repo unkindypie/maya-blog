@@ -15,8 +15,11 @@ describe("ProfilePage", () => {
       /<dt>Editor<\/dt><dd><a[^>]*href="https:\/\/github.com\/unkindypie\/maya-nvim"[^>]*>mvim /,
     );
     expect(specs).toContain('<span class="spec-detail">Neovim</span>');
-    expect(specs?.match(/<dt>/g)).toHaveLength(6);
-    expect(specs?.match(/<dd>/g)).toHaveLength(6);
+    expect(specs).toContain('href="https://github.com/unkindypie"');
+    expect(specs).toContain('href="mailto:maya1.bondarenko@gmail.com"');
+    expect(specs).toContain("@unkindypie");
+    expect(specs?.match(/<dt>/g)).toHaveLength(8);
+    expect(specs?.match(/<dd>/g)).toHaveLength(8);
   });
   it("renders one page heading and real links to each content section", () => {
     const markup = renderToStaticMarkup(<ProfilePage />);

@@ -30,6 +30,7 @@ export const profile = {
     "I use Fedora 44 with Hyprland, Kitty, zsh, and tmux. My editor is mvim, my own Neovim setup. Lately I've been working on local AI suggestions, keeping desktop themes in sync, and writing down the bits I don't want to figure out twice. I'm also working on the Vita port of Ship of Harkinian: bringing desktop-style mod support to Ocarina of Time so I can use nicer models and textures, starting with Djipi's 3DS Experience.",
 };
 export interface SystemSpec {
+  readonly stacked?: boolean;
   readonly label: string;
   readonly value: string;
   readonly detail?: string;
@@ -42,6 +43,18 @@ export const specs: readonly SystemSpec[] = [
   { label: "Terminal", value: "Kitty", detail: "Fantasque Sans Mono" },
   { label: "Editor", value: "mvim", detail: "Neovim", href: repositories.nvim },
   { label: "Theme", value: "Melange", detail: "Maya Light/Dark" },
+  {
+    label: "GitHub",
+    value: "@unkindypie",
+    href: contact.github,
+    stacked: true,
+  },
+  {
+    label: "Email",
+    value: contact.email,
+    href: `mailto:${contact.email}`,
+    stacked: true,
+  },
 ];
 export const tools = [
   {

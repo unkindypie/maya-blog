@@ -39,8 +39,11 @@ export function ProfilePage({ className = "" }: Readonly<ProfilePageProps>) {
             <SystemIcon name="terminal" /> QUICK_SPECS.SH
           </h2>
           <dl>
-            {specs.map(({ label, value, detail, href }) => (
-              <div className="spec-row" key={label}>
+            {specs.map(({ label, value, detail, href, stacked }) => (
+              <div
+                className={`spec-row${stacked ? " spec-contact" : ""}`}
+                key={label}
+              >
                 <dt>{label}</dt>
                 <dd>
                   {href ? (

@@ -1087,3 +1087,18 @@ h3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+.quick-specs .spec-contact {
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 4px;
+}
+.quick-specs .spec-contact dd {
+  align-items: flex-start;
+  text-align: left;
+}
+.quick-specs .spec-contact .spec-link {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: 11px;
+}
