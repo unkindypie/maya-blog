@@ -1,15 +1,34 @@
 ---
 title: "maya-nvim: my editor, with room for yours"
 category: Neovim / editor tooling
+images: ["/images/mvim-dashboard.webp", "/images/mvim-diagrams.webp"]
 date: "2026-10-29"
 description: Why mvim keeps the core setup, personal tweaks, and local AI separate.
 ---
+
+import Image from "next/image";
+import dashboard from "@/public/images/mvim-dashboard.webp";
+import diagrams from "@/public/images/mvim-diagrams.webp";
 
 [Repository: unkindypie/maya-nvim](https://github.com/unkindypie/maya-nvim)
 
 I wanted a Neovim setup that felt familiar when I opened it. File search, an explorer, language tools, formatting, Git diffs. The ordinary things, without having to remember which bit of my config made them work.
 
 That's [maya-nvim](https://github.com/unkindypie/maya-nvim). I launch it with `mvim`. It's inspired by LunarVim, but it's a standalone setup with its own launcher and config directory. My other Neovim configs can stay where they are.
+
+<figure>
+  <a href={dashboard.src} aria-label="Open full-size mvim dashboard screenshot">
+    <Image
+      src={dashboard}
+      alt="maya-nvim dashboard in Kitty, showing a Pokémon greeting, quick actions, and the tmux status bar."
+      sizes="(max-width: 767px) calc(100vw - 56px), (max-width: 1199px) calc(100vw - 280px), 1100px"
+    />
+  </a>
+  <figcaption>
+    The mvim dashboard in Kitty. Screenshot from the maya-nvim README; click to
+    open it at full size.
+  </figcaption>
+</figure>
 
 ## the core and the personal bits
 
@@ -46,6 +65,26 @@ Space opens the key hints. `Space f` finds files, `Space e` opens the explorer, 
 Folder sessions restore files, tabs, and splits when enabled. There are image and diagram previews too: PlantUML gets a preview pane, and SVG can keep its source beside a live view.
 
 And yes, there's a Pokémon greeting on the dashboard. That one is less about productivity.
+
+<figure>
+  <a
+    href={diagrams.src}
+    aria-label="Open full-size mvim diagram preview screenshot"
+  >
+    <Image
+      src={diagrams}
+      alt="PlantUML source open in maya-nvim beside a live diagram preview in a split pane."
+      sizes="(max-width: 767px) calc(100vw - 56px), (max-width: 1199px) calc(100vw - 280px), 1100px"
+    />
+  </a>
+  <figcaption>
+    {"PlantUML source and its preview pane, from the "}
+    <a href="https://github.com/unkindypie/maya-nvim#readme">
+      {"maya-nvim README"}
+    </a>
+    {"."}
+  </figcaption>
+</figure>
 
 ## sharing files with an external editor
 

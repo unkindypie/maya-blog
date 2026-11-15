@@ -12,43 +12,6 @@ My desktop is Fedora 44 with Hyprland. Kitty, zsh, tmux, and mvim are where I sp
 
 The configs live in [.maya-dotfiles](https://github.com/unkindypie/.maya-dotfiles). The editor has its own repo: [maya-nvim](https://github.com/unkindypie/maya-nvim).
 
-## what's running
-
-| Tool           | My setup                                                        |
-| -------------- | --------------------------------------------------------------- |
-| Desktop        | Hyprland on Wayland, with Waybar                                |
-| Terminal       | Kitty, Fantasque Sans Mono Nerd Font, and a notebook background |
-| Shell          | zsh, with tmux for terminal sessions                            |
-| Launcher       | Maya Rofi by default; Wofi is an optional alternative           |
-| Editor         | mvim, launched separately from other Neovim setups              |
-| Editor theme   | Melange, with a transparent background                          |
-| Desktop colors | Maya Light and Dark, generated from a shared palette            |
-
-## my editor config
-
-The core lives in `~/maya-nvim/`. My personal settings live in `~/.config/mvim/init.lua`, which is also tracked with my dotfiles.
-
-This is the part that connects the editor to the desktop. It's an excerpt from my personal config; `mvim.desktop_theme` is a personal module included in the dotfiles, not a Neovim built-in.
-
-```lua filename="~/.config/mvim/init.lua"
-local desktop_theme = require("mvim.desktop_theme")
-
-return {
-  codex_ide_context = true,
-  transparent_background = true,
-  reopen_tabs = true,
-  pokemon_sound_on_start = true,
-  pokemon_sound_on_start_volume_percentage = 50,
-  theme = "savq/melange-nvim",
-  theme_background = desktop_theme.mode(),
-  setup = function()
-    desktop_theme.setup()
-  end,
-}
-```
-
-maya-nvim ships with Catppuccin Frappé. My personal choice is Melange. Keeping that distinction in the config means someone can use mvim without inheriting every little thing I like.
-
 ## what it looks like
 
 <figure>
@@ -86,6 +49,43 @@ PlantUML can sit beside a live diagram preview too. I can edit the source and ke
     {"."}
   </figcaption>
 </figure>
+
+## what's running
+
+| Tool           | My setup                                                        |
+| -------------- | --------------------------------------------------------------- |
+| Desktop        | Hyprland on Wayland, with Waybar                                |
+| Terminal       | Kitty, Fantasque Sans Mono Nerd Font, and a notebook background |
+| Shell          | zsh, with tmux for terminal sessions                            |
+| Launcher       | Maya Rofi by default; Wofi is an optional alternative           |
+| Editor         | mvim, launched separately from other Neovim setups              |
+| Editor theme   | Melange, with a transparent background                          |
+| Desktop colors | Maya Light and Dark, generated from a shared palette            |
+
+## my editor config
+
+The core lives in `~/maya-nvim/`. My personal settings live in `~/.config/mvim/init.lua`, which is also tracked with my dotfiles.
+
+This is the part that connects the editor to the desktop. It's an excerpt from my personal config; `mvim.desktop_theme` is a personal module included in the dotfiles, not a Neovim built-in.
+
+```lua filename="~/.config/mvim/init.lua"
+local desktop_theme = require("mvim.desktop_theme")
+
+return {
+  codex_ide_context = true,
+  transparent_background = true,
+  reopen_tabs = true,
+  pokemon_sound_on_start = true,
+  pokemon_sound_on_start_volume_percentage = 50,
+  theme = "savq/melange-nvim",
+  theme_background = desktop_theme.mode(),
+  setup = function()
+    desktop_theme.setup()
+  end,
+}
+```
+
+maya-nvim ships with Catppuccin Frappé. My personal choice is Melange. Keeping that distinction in the config means someone can use mvim without inheriting every little thing I like.
 
 ## one switch for Light and Dark
 
