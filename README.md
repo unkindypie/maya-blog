@@ -63,6 +63,8 @@ Global metadata lives in `app/layout.tsx`, navigation in `ui/components/site-nav
 | `pnpm test:watch`   | Watch tests while editing                                     |
 | `pnpm check`        | Run formatting, lint, types, and tests                        |
 
+`pnpm audit` checks all installed dependency paths, including development tools; `pnpm audit --prod` checks the production subset. CI runs the full audit. See [the dependency audit report](docs/dependency-audit.md) for security overrides and the two upstream deprecation warnings that remain during dependency resolution.
+
 The project uses the same Prettier, ESLint, and TypeScript tools as mvim. Repository configs apply in the editor and CLI; no editor configuration changes are required. Generated output is ignored by formatters and linters. CI runs all checks and the production build on pushes and pull requests.
 
 ## Build and preview
