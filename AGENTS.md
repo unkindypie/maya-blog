@@ -53,6 +53,8 @@ Maya writes her articles and about info in her own style, simple not very AI'ish
 
 ### Usage:
 
+- For requested dependency audits or install-warning cleanup, use the project-local [dependency-audit skill](.agents/skills/dependency-audit/SKILL.md).
+
 - Run `pnpm format` before finishing code changes unless the user says otherwise. If command not present configure it.
 - Run `pnpm format:md` before finishing Markdown changes unless the user says otherwise. If command not present configure it.
 - Run `pnpm lint` before finishing code changes unless the user says otherwise.

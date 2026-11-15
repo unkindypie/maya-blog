@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dependency Audit"
+  short_description: "Audit pnpm dependencies and install warnings"
+  default_prompt: "Use $dependency-audit to check install warnings, audit dependencies, and validate safe fixes in this repository."
