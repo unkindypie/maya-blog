@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Layout } from "nextra-theme-blog";
+import { getPageMap } from "nextra/page-map";
+import { collectPosts } from "@/lib/posts";
 import { Head } from "nextra/components";
 import { DesktopShell } from "@/ui/components/desktop-shell";
 import "nextra-theme-blog/style.css";
@@ -13,7 +15,9 @@ export const metadata: Metadata = {
 export interface RootLayoutProps {
   readonly children: ReactNode;
 }
-export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
+export default async function RootLayout({
+  children,
+}: Readonly<RootLayoutProps>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <Head backgroundColor={{ dark: "#161215", light: "#161215" }} />
@@ -22,7 +26,9 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
           Skip to content
         </a>
         <Layout nextThemes={{ forcedTheme: "dark" }}>
-          <DesktopShell>{children}</DesktopShell>
+          <DesktopShell posts={collectPosts(await getPageMap())}>
+            {children}
+          </DesktopShell>
         </Layout>
       </body>
     </html>

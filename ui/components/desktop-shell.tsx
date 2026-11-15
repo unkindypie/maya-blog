@@ -1,4 +1,5 @@
 "use client";
+import type { Post } from "@/lib/posts";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -6,8 +7,9 @@ import { SiteNav } from "./site-nav";
 import { SystemIcon } from "./system-icon";
 export interface DesktopShellProps {
   readonly children: ReactNode;
+  readonly posts: readonly Post[];
 }
-export function DesktopShell({ children }: Readonly<DesktopShellProps>) {
+export function DesktopShell({ children, posts }: Readonly<DesktopShellProps>) {
   const pathname = usePathname();
   return (
     <div className="desktop-shell">
@@ -28,14 +30,14 @@ export function DesktopShell({ children }: Readonly<DesktopShellProps>) {
           <span>EXPLORER</span>
           <span>~/maya/</span>
         </div>
-        <SiteNav variant="explorer" />
+        <SiteNav variant="explorer" posts={posts} />
       </aside>
       <details className="mobile-explorer" key={pathname}>
         <summary>
           <span>☰ explorer</span>
           <span>~/maya/</span>
         </summary>
-        <SiteNav variant="explorer" />
+        <SiteNav variant="explorer" posts={posts} />
       </details>
       <div className="workspace">
         <main id="content" tabIndex={-1}>

@@ -1,5 +1,6 @@
 import { SystemIcon } from "./system-icon";
 export interface InfoCardProps {
+  readonly id?: string;
   readonly label: string;
   readonly icon: string;
   readonly title: string;
@@ -8,6 +9,7 @@ export interface InfoCardProps {
   readonly compact?: boolean;
 }
 export function InfoCard({
+  id,
   label,
   icon,
   title,
@@ -16,7 +18,7 @@ export function InfoCard({
   compact = false,
 }: Readonly<InfoCardProps>) {
   return (
-    <article className={`info-card${compact ? " compact" : ""}`}>
+    <article id={id} className={`info-card${compact ? " compact" : ""}`}>
       <div className="card-eyebrow">
         <span>{label}</span>
         <SystemIcon name={icon} />

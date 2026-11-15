@@ -1,6 +1,8 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { ProfilePage } from "../../../ui/components/profile-page";
+import { ProjectGrid } from "../../../ui/components/project-grid";
+import { projectLinks } from "../../../lib/site-content";
 import { InfoCard } from "../../../ui/components/info-card";
 
 describe("ProfilePage", () => {
@@ -29,5 +31,13 @@ describe("InfoCard", () => {
     expect(markup).toContain("A &amp; B");
     expect(markup).toContain("Lua");
     expect(markup).toContain("Neovim");
+  });
+});
+
+describe("ProjectGrid", () => {
+  it("provides a target for every project explorer link", () => {
+    const markup = renderToStaticMarkup(<ProjectGrid />);
+    for (const project of projectLinks)
+      expect(markup).toContain(`id="${project.id}"`);
   });
 });

@@ -97,3 +97,9 @@ export const projectCards = [
   interests[2],
   { ...hardware[2], label: "editor_tools", tags: ["Lua", "Neovim", "mvim"] },
 ];
+
+export const projectLinks = [
+  { id: "handheld-homebrew", label: "handheld-homebrew" },
+  { id: "local-ai", label: "local-ai" },
+  { id: "mvim", label: "mvim" },
+] as const;

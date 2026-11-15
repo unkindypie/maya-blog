@@ -38,4 +38,43 @@ describe("SiteNav", () => {
       'aria-current="page"',
     );
   });
+  it("opens Blog on an article and marks the article as the current file", () => {
+    current.pathname = "/blog/hello/";
+    const markup = renderToStaticMarkup(
+      <SiteNav
+        variant="explorer"
+        posts={[
+          {
+            route: "/blog/hello",
+            title: "Hello world",
+            date: "2026-11-15",
+            description: "",
+          },
+        ]}
+      />,
+    );
+    expect(markup).toMatch(/<details class="explorer-folder" open="">/);
+    expect(markup).toMatch(
+      /<a[^>]*aria-current="page"[^>]*href="\/blog\/hello"/,
+    );
+    expect(markup).toContain("hello.md");
+    expect(markup).toContain('title="Hello world"');
+    expect(markup.match(/aria-current="page"/g)).toHaveLength(1);
+  });
+  it("keeps folders closed away from their pages and handles an empty blog", () => {
+    current.pathname = "/";
+    const markup = renderToStaticMarkup(<SiteNav variant="explorer" />);
+    expect(markup).not.toContain('open=""');
+    expect(markup).toContain("no posts yet");
+    expect(markup).toContain('href="/blog"');
+  });
+  it("expands Projects and links to the real project card anchors", () => {
+    current.pathname = "/projects/";
+    const markup = renderToStaticMarkup(<SiteNav variant="explorer" />);
+    expect(markup.match(/open=""/g)).toHaveLength(1);
+    for (const id of ["handheld-homebrew", "local-ai", "mvim"]) {
+      expect(markup).toContain(`href="/projects#${id}"`);
+    }
+    expect(markup).toMatch(/<a[^>]*aria-current="page"[^>]*href="\/projects"/);
+  });
 });
