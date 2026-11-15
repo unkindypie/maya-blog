@@ -89,7 +89,7 @@ pnpm start
 
 The `/now` panel on `/` and `/about/` server-renders the five most recent public commits authored by the configured GitHub username. It uses [GitHub commit search](https://docs.github.com/en/rest/search/search#search-commits), sorted by committer date. Search follows GitHub's index, so newly pushed commits can take time to appear; it is not limited to repositories owned by the account.
 
-Next.js caches the GitHub fetch and regenerates the affected pages after 15 minutes when they are requested. Visitors receive the cached page while revalidation happens in the background. Other MDX pages stay prerendered. The request has an eight-second timeout; an empty account or unavailable API gets an editable fallback with a GitHub profile link.
+Next.js caches the GitHub fetch and regenerates the affected pages after 24 hours when they are requested. Visitors receive the cached page while revalidation happens in the background. Other MDX pages stay prerendered. The request has an eight-second timeout; an empty account or unavailable API gets an editable fallback with a GitHub profile link.
 
 Public data works without a token. On a busy shared host, optionally set `GITHUB_ACTIVITY_TOKEN` in the server/build environment to raise GitHub's API limits. It is never sent to the browser. The query explicitly requests public repositories and results are checked again to exclude private repositories and other authors. No Git authentication credentials are reused. No client-side API request, database, or scheduled job is needed.
 

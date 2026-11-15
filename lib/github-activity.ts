@@ -78,7 +78,7 @@ export async function getPublicCommits(
     `https://api.github.com/search/commits?${query}`,
     {
       headers,
-      next: { revalidate: 900 },
+      next: { revalidate: 86400 },
       signal: AbortSignal.timeout(8000),
     },
   );

@@ -62,7 +62,7 @@ describe("public GitHub commits", () => {
       parsePublicCommits({ items: [commit(1, { sha: "bad" })] }, "unkindypie"),
     ).toThrow();
   });
-  it("fetches public activity in date order with a 15-minute ISR cache", async () => {
+  it("fetches public activity in date order with a 24-hour ISR cache", async () => {
     vi.stubEnv("GITHUB_ACTIVITY_TOKEN", "");
     const fetchMock = vi
       .fn()
@@ -74,7 +74,7 @@ describe("public GitHub commits", () => {
     expect(params.get("q")).toBe("author:unkindypie is:public");
     expect(params.get("sort")).toBe("committer-date");
     expect(params.get("order")).toBe("desc");
-    expect(options.next.revalidate).toBe(900);
+    expect(options.next.revalidate).toBe(86400);
     expect(options.headers.Authorization).toBeUndefined();
   });
   it("keeps optional authentication on the server and rejects invalid usernames", async () => {
