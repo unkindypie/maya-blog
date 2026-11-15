@@ -121,6 +121,7 @@ describe("MDX profile components", () => {
           label="Editor"
           value="My editor"
           detail="My version"
+          alongside={["Codex", "OpenCode"]}
           href="https://example.com/repo"
         />
         <SpecRow
@@ -139,8 +140,11 @@ describe("MDX profile components", () => {
     );
     expect(markup).toContain('href="mailto:author@example.com">');
     expect(markup).toContain("My version");
+    expect(markup).toContain("Codex");
+    expect(markup).toContain("OpenCode");
+    expect(markup).toMatch(/aria-hidden="true">\/<\/span>/);
     expect(markup.match(/<dt>/g)).toHaveLength(2);
-    expect(markup.match(/<dd>/g)).toHaveLength(2);
+    expect(markup.match(/<dd(?:\s|>)/g)).toHaveLength(2);
   });
 });
 describe("InfoCard", () => {

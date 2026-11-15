@@ -32,6 +32,7 @@ export interface SpecRowProps {
   readonly detail?: string;
   readonly href?: string;
   readonly wide?: boolean;
+  readonly alongside?: readonly string[];
 }
 export function SpecRow({
   label,
@@ -39,25 +40,40 @@ export function SpecRow({
   detail,
   href,
   wide,
+  alongside,
 }: Readonly<SpecRowProps>) {
   const isExternal = href !== undefined && /^https?:\/\//.test(href);
   return (
     <div className={`spec-row${wide ? " spec-wide" : ""}`}>
       <dt>{label}</dt>
-      <dd>
-        {href ? (
-          <a
-            className="spec-value spec-link"
-            href={href}
-            target={isExternal ? "_blank" : undefined}
-            rel={isExternal ? "noopener noreferrer" : undefined}
-          >
-            {value} <span aria-hidden="true">↗</span>
-          </a>
-        ) : (
-          <span className="spec-value">{value}</span>
+      <dd className={alongside?.length ? "spec-pair" : undefined}>
+        <div className="spec-values">
+          {href ? (
+            <a
+              className="spec-value spec-link"
+              href={href}
+              target={isExternal ? "_blank" : undefined}
+              rel={isExternal ? "noopener noreferrer" : undefined}
+            >
+              {value} <span aria-hidden="true">↗</span>
+            </a>
+          ) : (
+            <span className="spec-value">{value}</span>
+          )}
+          {detail && <span className="spec-detail">{detail}</span>}
+        </div>
+        {Boolean(alongside?.length) && (
+          <>
+            <span className="spec-divider" aria-hidden="true">
+              /
+            </span>
+            <div className="spec-alongside">
+              {alongside?.map((value) => (
+                <span key={value}>{value}</span>
+              ))}
+            </div>
+          </>
         )}
-        {detail && <span className="spec-detail">{detail}</span>}
       </dd>
     </div>
   );

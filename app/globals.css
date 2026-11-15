@@ -1313,3 +1313,36 @@ h3 {
     justify-self: center;
   }
 }
+
+.spec-values {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  min-width: 0;
+}
+.quick-specs .spec-row:has(.spec-pair) {
+  grid-column: 1 / -1;
+}
+.quick-specs dd.spec-pair {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.spec-divider {
+  color: var(--primary);
+  font-size: 32px;
+  font-weight: 100;
+  line-height: 1;
+}
+.spec-alongside {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--dim);
+  white-space: nowrap;
+}
