@@ -1,36 +1,107 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { ProfilePage } from "../../../ui/components/profile-page";
+import { ProfileHero, ProfileIntro } from "../../../ui/components/profile-hero";
+import { ProfileSection } from "../../../ui/components/profile-section";
+import {
+  ProfilePanels,
+  ProfilePanel,
+  ProfileLink,
+} from "../../../ui/components/profile-panels";
+import { QuickSpecs, SpecRow } from "../../../ui/components/quick-specs";
 import { ProjectGrid } from "../../../ui/components/project-grid";
-import { projectLinks } from "../../../lib/site-content";
 import { InfoCard } from "../../../ui/components/info-card";
 
-describe("ProfilePage", () => {
-  it("links mvim to its repository inside the editor specification", () => {
-    const markup = renderToStaticMarkup(<ProfilePage />);
-    const specs = markup.match(
-      /<aside class="quick-specs"[\s\S]*?<\/aside>/,
-    )?.[0];
-    expect(specs).toMatch(
-      /<dt>Editor<\/dt><dd><a[^>]*href="https:\/\/github.com\/unkindypie\/maya-nvim"[^>]*>mvim /,
+describe("MDX profile components", () => {
+  it("renders author-supplied headings, prose, badges, cards, lists, and links", () => {
+    const markup = renderToStaticMarkup(
+      <ProfilePage>
+        <ProfileHero>
+          <ProfileIntro
+            title="An editable profile"
+            face=":)"
+            badges={["My badge"]}
+            command="my command"
+            workspace="my workspace"
+          >
+            <p>My experience, written in Markdown.</p>
+            <p>My current setup.</p>
+          </ProfileIntro>
+          <aside>My specs</aside>
+        </ProfileHero>
+        <ProfileSection title="My section" detail="My caption" grid="hardware">
+          <InfoCard
+            label="my-card"
+            title="My tool"
+            icon="terminal"
+            description="My description"
+            tags={["Lua"]}
+          />
+        </ProfileSection>
+        <ProfilePanels>
+          <ProfilePanel
+            variant="now"
+            title="My updates"
+            icon="◷"
+            note="My note"
+          >
+            <ul>
+              <li>My current project.</li>
+            </ul>
+            <ProfileLink href="/blog" label="My notes" />
+          </ProfilePanel>
+          <ProfilePanel
+            variant="connect"
+            title="My contacts"
+            icon="@"
+            note="Say hi"
+            prompt="$"
+            footer="My footer"
+          >
+            <ProfileLink href="mailto:author@example.com" label="Email me" />
+          </ProfilePanel>
+        </ProfilePanels>
+      </ProfilePage>,
     );
-    expect(specs).toContain('<span class="spec-detail">Neovim</span>');
-    expect(specs).toContain('href="https://github.com/unkindypie"');
-    expect(specs).toContain('href="mailto:maya1.bondarenko@gmail.com"');
-    expect(specs).toContain("@unkindypie");
-    expect(specs?.match(/<dt>/g)).toHaveLength(8);
-    expect(specs?.match(/<dd>/g)).toHaveLength(8);
-  });
-  it("renders one page heading and real links to each content section", () => {
-    const markup = renderToStaticMarkup(<ProfilePage />);
     expect(markup.match(/<h1>/g)).toHaveLength(1);
-    for (const path of ["/blog", "/dotfiles", "/projects"]) {
-      expect(markup).toContain(`href="${path}"`);
-    }
-    expect(markup).toContain('href="https://github.com/unkindypie"');
-    expect(markup).toContain('href="mailto:maya1.bondarenko@gmail.com"');
-    expect(markup).not.toContain('href="#"');
-    expect(markup).toContain('aria-label="Quick system specs"');
+    for (const text of [
+      "An editable profile",
+      "My badge",
+      "My experience, written in Markdown.",
+      "My specs",
+      "My tool",
+      "My caption",
+      "My current project.",
+      "My footer",
+    ])
+      expect(markup).toContain(text);
+    expect(markup).toContain('href="/blog"');
+    expect(markup).toContain('href="mailto:author@example.com"');
+    expect(markup).not.toContain("Fedora");
+  });
+  it("keeps specification labels, values, detail text, and links editable", () => {
+    const markup = renderToStaticMarkup(
+      <QuickSpecs title="MY_SPECS" footer="My machine" status="available">
+        <SpecRow
+          label="Editor"
+          value="My editor"
+          detail="My version"
+          href="https://example.com/repo"
+        />
+        <SpecRow
+          label="Email"
+          value="author@example.com"
+          href="mailto:author@example.com"
+          stacked
+        />
+      </QuickSpecs>,
+    );
+    expect(markup).toContain("<dt>Editor</dt>");
+    expect(markup).toContain('href="https://example.com/repo"');
+    expect(markup).toContain('href="mailto:author@example.com"');
+    expect(markup).toContain("My version");
+    expect(markup.match(/<dt>/g)).toHaveLength(2);
+    expect(markup.match(/<dd>/g)).toHaveLength(2);
   });
 });
 describe("InfoCard", () => {
@@ -50,20 +121,24 @@ describe("InfoCard", () => {
     expect(markup).toContain("Neovim");
   });
 });
-
 describe("ProjectGrid", () => {
-  it("provides a target for every project explorer link", () => {
-    const markup = renderToStaticMarkup(<ProjectGrid />);
-    for (const project of projectLinks)
-      expect(markup).toContain(`id="${project.id}"`);
-    for (const repo of ["maya-nvim", ".maya-dotfiles"])
-      expect(markup).toContain(`href="https://github.com/unkindypie/${repo}"`);
-    for (const slug of [
-      "maya-nvim",
-      "maya-dotfiles",
-      "local-ai-in-mvim",
-      "oot-vita-modding",
-    ])
-      expect(markup).toContain(`href="/blog/${slug}"`);
+  it("renders cards authored by its caller with their anchors and links intact", () => {
+    const markup = renderToStaticMarkup(
+      <ProjectGrid>
+        <InfoCard
+          id="my-project"
+          label="my-project"
+          icon="code"
+          title="My project"
+          description="Authored in MDX"
+          tags={[]}
+          links={[{ href: "/blog/my-project", label: "Read more" }]}
+        />
+      </ProjectGrid>,
+    );
+    expect(markup).toContain('id="my-project"');
+    expect(markup).toContain('href="/blog/my-project"');
+    expect(markup).toContain("Authored in MDX");
+    expect(markup.match(/class="info-card"/g)).toHaveLength(1);
   });
 });

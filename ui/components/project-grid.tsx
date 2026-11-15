@@ -1,14 +1,13 @@
-import { projectCards } from "@/lib/site-content";
-import { InfoCard } from "./info-card";
+import type { ReactNode } from "react";
 export interface ProjectGridProps {
+  readonly children: ReactNode;
   readonly className?: string;
 }
-export function ProjectGrid({ className = "" }: Readonly<ProjectGridProps>) {
+export function ProjectGrid({
+  children,
+  className = "",
+}: Readonly<ProjectGridProps>) {
   return (
-    <div className={`interests-grid project-grid ${className}`}>
-      {projectCards.map((card) => (
-        <InfoCard key={card.id} {...card} />
-      ))}
-    </div>
+    <div className={`interests-grid project-grid ${className}`}>{children}</div>
   );
 }

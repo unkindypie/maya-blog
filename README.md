@@ -16,7 +16,22 @@ Open [localhost:3000](http://localhost:3000). MDX edits reload automatically.
 
 ## Writing
 
-Edit `content/projects.mdx` and `content/dotfiles.mdx` for the main documents. Home and About render the shared profile in `ui/components/profile-page.tsx`; edit the profile, hardware, and navigation data in `lib/site-content.ts`. Blog posts cover maya-nvim, .maya-dotfiles, local AI in mvim, and OoT mod compatibility on Vita. Publication dates use actual commits near each project’s elapsed-history midpoint; [article date notes](docs/article-dates.md) record the selection. The About profile and tool descriptions are based on the local configs reviewed for these articles; update them when your setup changes.
+Page content lives in MDX. Edit `content/about.mdx` for the profile text, badges, specs, tool cards, interests, current projects, and contact-panel links. The introduction and current-project list are ordinary Markdown inside `ProfileIntro` and `ProfilePanel`; card and spec text is passed as props. The homepage imports that same About MDX, so one edit updates both `/` and `/about/`.
+
+Edit `content/projects.mdx` for project cards and prose, and `content/dotfiles.mdx` for the setup guide and screenshots. `ProfileHero`, `ProfileIntro`, `ProfileSection`, `ProfilePanel`, `QuickSpecs`, `SpecRow`, `InfoCard`, and `ProjectGrid` in `ui/components/` own the markup and styling, not the page copy. Shared navigation, footer contact links, and Explorer project targets remain in `lib/site-content.ts`; match each project card's `id` to its Explorer target when adding or renaming one.
+
+For example, a spec row in About is editable directly:
+
+```mdx
+<SpecRow
+  label="Editor"
+  value="mvim"
+  detail="Neovim"
+  href="https://github.com/unkindypie/maya-nvim"
+/>
+```
+
+Blog posts cover maya-nvim, .maya-dotfiles, local AI in mvim, and OoT mod compatibility on Vita. Publication dates use actual commits near each project's elapsed-history midpoint; [article date notes](docs/article-dates.md) record the selection. Update the profile when your setup changes.
 
 Add a file such as `content/blog/my-post.mdx`:
 

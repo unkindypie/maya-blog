@@ -3,11 +3,69 @@ title: projects
 description: My Neovim setup, Linux dotfiles, local AI, and Ocarina of Time modding on PS Vita.
 ---
 
+import { InfoCard } from "@/ui/components/info-card";
 import { ProjectGrid } from "@/ui/components/project-grid";
 
 These are the pet projects I keep coming back to. My editor and desktop configs, local AI experiments, and a Vita project that started with wanting Ocarina of Time to look a little prettier.
 
-<ProjectGrid />
+<ProjectGrid>
+
+<InfoCard
+  id="mvim"
+  label="maya-nvim"
+  icon="terminal"
+  title="maya-nvim / mvim"
+  description="My standalone Neovim setup for Linux and macOS. An installer, language tooling, local AI, folder sessions, and personal overrides in ~/.config/mvim/."
+  tags={["Lua", "Neovim", "Ollama"]}
+  links={[
+    { href: "https://github.com/unkindypie/maya-nvim", label: "GitHub" },
+    { href: "/blog/maya-nvim", label: "Read the article" },
+  ]}
+/>
+
+<InfoCard
+  id="dotfiles"
+  label="maya-dotfiles"
+  icon="laptop"
+  title=".maya-dotfiles"
+  description="My Hyprland desktop and terminal configs. Paper colors, pastels, a shared Light/Dark palette, symlinked configs, and scripts for applying and repairing the setup."
+  tags={["Hyprland", "Kitty", "Python"]}
+  links={[
+    { href: "https://github.com/unkindypie/.maya-dotfiles", label: "GitHub" },
+    { href: "/blog/maya-dotfiles", label: "Read the article" },
+  ]}
+/>
+
+<InfoCard
+  id="local-ai"
+  label="local-ai"
+  icon="chip"
+  title="Local AI in mvim"
+  description="The AI side of maya-nvim: Cursortab, Ollama, and a bounded cache of LSP hints. One local model handles completions and next edits; cloud providers stay opt-in."
+  tags={["Cursortab", "Ollama", "Lua"]}
+  links={[
+    {
+      href: "https://github.com/unkindypie/maya-nvim/blob/master/lua/maya/ai_context.lua",
+      label: "Context collector",
+    },
+    { href: "/blog/local-ai-in-mvim", label: "Read the article" },
+  ]}
+/>
+
+<InfoCard
+  id="oot-mods"
+  label="oot-mods"
+  icon="gamepad"
+  title="Ship of Harkinian Mods / Vita"
+  description="Updating the older Vita OoT port toward the mod support I wanted from desktop SoH. Work on textures, models, resource loading, and memory use, inspired by Djipi's 3DS Experience. Original-archive compatibility is still in progress."
+  tags={["PS Vita", "C++", "Ocarina of Time"]}
+  links={[
+    { href: "/blog/oot-vita-modding", label: "Read the article" },
+    { href: "https://gamebanana.com/mods/477979", label: "Mod inspiration" },
+  ]}
+/>
+
+</ProjectGrid>
 
 ## a place for the little details
 

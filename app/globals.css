@@ -308,19 +308,6 @@ h3 {
   background: #ffc1cc40;
   color: #ffd9df;
 }
-.profile-lead {
-  font-size: 16px;
-  line-height: 1.65;
-  margin-bottom: 10px;
-}
-.profile-detail {
-  font-size: 14px;
-  line-height: 1.65;
-  color: var(--muted);
-}
-.profile-detail + .profile-detail {
-  margin-top: 10px;
-}
 .quick-specs {
   background: var(--panel);
   border-radius: var(--radius);
@@ -888,12 +875,6 @@ h3 {
   .profile-hero h1 span {
     font-size: 23px;
   }
-  .profile-lead {
-    font-size: 14px;
-  }
-  .profile-detail {
-    font-size: 13px;
-  }
   .identity-badges span {
     font-size: 10px;
   }
@@ -1232,4 +1213,27 @@ h3 {
 
 .markdown-body > * + * {
   margin-top: 20px;
+}
+
+/* Profile prose is authored as ordinary Markdown inside ProfileHero. */
+.profile-copy > p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.profile-copy > p:first-child {
+  font-size: 16px;
+  color: var(--foreground);
+}
+.profile-copy > p + p {
+  margin-top: 10px;
+}
+@media (max-width: 767px) {
+  .profile-copy > p {
+    font-size: 13px;
+  }
+  .profile-copy > p:first-child {
+    font-size: 14px;
+  }
 }

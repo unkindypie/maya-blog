@@ -82,6 +82,7 @@ Maya writes her articles and about info in her own style, simple not very AI'ish
 ### Frontend:
 
 - Shared UI library: keep `ui/components` directory for shared UI components.
+- Keep page prose and page-specific card/spec content in `content/*.mdx`. Shared components receive that content through props or children; do not hide page copy in component implementations or a global TypeScript content file.
 - Responsive layout: Ensure site looks good on all devices - Desktop, Portait, Mobile.
 - React Query: If you developed a new API (API route or a server-action) and need to use it (get something, create something) - wrap into React Query query or mutation.
 - Track loading states of react queries via toast notifications (install any library if needed). If it was called by button, show spinner loading indicator inside that button title to track isLoading state.

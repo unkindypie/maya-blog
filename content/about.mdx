@@ -5,5 +5,176 @@ description: Maya's Linux desktop, Neovim config, local AI experiments, and Ocar
 ---
 
 import { ProfilePage } from "@/ui/components/profile-page";
+import { ProfileHero, ProfileIntro } from "@/ui/components/profile-hero";
+import { ProfileSection } from "@/ui/components/profile-section";
+import {
+  ProfilePanels,
+  ProfilePanel,
+  ProfileLink,
+} from "@/ui/components/profile-panels";
+import { QuickSpecs, SpecRow } from "@/ui/components/quick-specs";
+import { InfoCard } from "@/ui/components/info-card";
 
-<ProfilePage />
+<ProfilePage>
+
+<ProfileHero>
+
+<ProfileIntro
+  title="hey, i'm maya"
+  face="(◕‿◕✿)"
+  badges={[
+    "she/her 🏳️‍⚧️",
+    "8+ yrs exp :: sr systems architect",
+    "B.S. in Software Engineering",
+    "● status: hacking / alive",
+  ]}
+  command="cat /dev/maya >> stdout"
+  workspace="workspace 1"
+>
+
+I've spent the last 8+ years designing distributed infrastructure and building backends from zero to millions of requests per second, across seed to Series B tech teams. These days I split my time between private systems consulting and my own projects.
+
+I like making my tools feel like mine. Most of that ends up in my Neovim config, my Linux desktop, and little scripts that make the two get along.
+
+I use Fedora 44 with Hyprland, Kitty, zsh, and tmux. My editor is mvim, my own Neovim setup. Lately I've been working on local AI suggestions, keeping desktop themes in sync, and writing down the bits I don't want to figure out twice. I'm also working on the Vita port of Ship of Harkinian: bringing desktop-style mod support to Ocarina of Time so I can use nicer models and textures, starting with Djipi's 3DS Experience.
+
+</ProfileIntro>
+
+<QuickSpecs title="QUICK_SPECS.SH" footer="personal workspace" status="local">
+  <SpecRow label="OS" value="Fedora Linux 44" />
+  <SpecRow label="Desktop" value="Hyprland" detail="Waybar" />
+  <SpecRow label="Shell" value="zsh" detail="tmux" />
+  <SpecRow label="Terminal" value="Kitty" detail="Fantasque Sans Mono" />
+  <SpecRow
+    label="Editor"
+    value="mvim"
+    detail="Neovim"
+    href="https://github.com/unkindypie/maya-nvim"
+  />
+  <SpecRow label="Theme" value="Melange" detail="Maya Light/Dark" />
+  <SpecRow
+    label="GitHub"
+    value="@unkindypie"
+    href="https://github.com/unkindypie"
+    stacked={true}
+  />
+  <SpecRow
+    label="Email"
+    value="maya1.bondarenko@gmail.com"
+    href="mailto:maya1.bondarenko@gmail.com"
+    stacked={true}
+  />
+</QuickSpecs>
+
+</ProfileHero>
+
+<ProfileSection title="what's in my terminal" detail="cat ~/.config/mvim/init.lua" grid="hardware">
+
+<InfoCard
+  label="01 / desktop"
+  icon="laptop"
+  title="Fedora + Hyprland"
+  description="Waybar, a Rofi launcher, and paper/pastel colors. Maya Light and Dark share the same layout, so switching modes doesn't rearrange my desktop."
+  tags={["Fedora 44", "Wayland"]}
+  compact
+/>
+
+<InfoCard
+  label="02 / terminal"
+  icon="terminal"
+  title="Kitty, zsh & tmux"
+  description="Fantasque Sans Mono in Kitty, a notebook background, and tmux for keeping terminal work together. The shell and status bar follow the desktop palette."
+  tags={["Kitty", "tmux"]}
+  compact
+/>
+
+<InfoCard
+  label="03 / editor"
+  icon="code"
+  title="mvim / maya-nvim"
+  description="My Lua-based Neovim setup. Language tools, formatting, folder sessions, Git diffs, and a Pokémon greeting. Personal tweaks live outside the core config."
+  tags={["Lua", "lazy.nvim"]}
+  compact
+/>
+
+<InfoCard
+  label="04 / colors"
+  icon="folder"
+  title="Melange + Maya"
+  description="Melange in the editor, with a transparent background. A small personal watcher follows the desktop's Light/Dark selector without replacing the editor's colors."
+  tags={["Melange", "maya-theme"]}
+  compact
+/>
+
+</ProfileSection>
+
+<ProfileSection title="things i keep working on" detail="~/projects/" grid="interests">
+
+<InfoCard
+  label="editor_tools"
+  icon="terminal"
+  title="An editor I can live in"
+  description="maya-nvim started as a place for my editor config. It now has its own installer, optional local AI, and a separate place for personal settings. I still want it to feel familiar when I open a file."
+  tags={["Neovim", "Lua", "LSP"]}
+/>
+
+<InfoCard
+  label="desktop_dots"
+  icon="laptop"
+  title="A desktop that matches"
+  description="My dotfiles connect Hyprland, Waybar, Kitty, launchers, and the shell. The palette is shared, but each app keeps its own layout. Cream paper in Light, warm charcoal in Dark, pink in both."
+  tags={["Hyprland", "Python", "CSS"]}
+/>
+
+<InfoCard
+  label="local_ai"
+  icon="chip"
+  title="Small models, useful context"
+  description="I'm working on local completions and next-edit suggestions in mvim. Cursortab and Ollama do the inference; my Lua code gathers nearby type information from the language server."
+  tags={["Ollama", "Cursortab", "LSP"]}
+/>
+
+<InfoCard
+  label="vita_homebrew"
+  icon="gamepad"
+  title="Ocarina of Time, on my Vita"
+  description="The Switch 2 remake got me wanting prettier OoT models and textures on my Vita too. I'm updating the older Ship of Harkinian port toward desktop-style mod support, using Djipi's 3DS Experience as the starting point."
+  tags={["PS Vita", "C++", "Ship of Harkinian"]}
+  links={[{ href: "/blog/oot-vita-modding", label: "Read the story" }]}
+/>
+
+</ProfileSection>
+
+<ProfilePanels>
+
+<ProfilePanel variant="now" title="/now" icon="◷" note="things in progress">
+
+- Working on original-mod loading in the Vita Ship of Harkinian port.
+- Working on type-aware local AI suggestions in mvim.
+- Keeping Maya Light/Dark consistent across the desktop and editor.
+- Making the configs easier to install, update, and make your own.
+- Writing notes about the small things that took longer than expected.
+
+<ProfileLink href="/blog" label="Read my notes" />
+
+</ProfilePanel>
+
+<ProfilePanel variant="connect" title="connect" icon="@" note="say hi" prompt="~/maya $" footer="welcome to my little corner of the internet.">
+
+<ProfileLink
+  href="https://github.com/unkindypie"
+  label="github.com/unkindypie"
+/>
+<ProfileLink
+  href="mailto:maya1.bondarenko@gmail.com"
+  label="maya1.bondarenko@gmail.com"
+/>
+<ProfileLink href="/blog" label="blog / notes to future me" />
+<ProfileLink href="/dotfiles" label="dotfiles / make it feel like mine" />
+<ProfileLink href="/projects" label="projects / things i'm building" />
+
+</ProfilePanel>
+
+</ProfilePanels>
+
+</ProfilePage>
