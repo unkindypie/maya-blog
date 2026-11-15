@@ -30,7 +30,8 @@ export function ProfilePage({ className = "" }: Readonly<ProfilePageProps>) {
               <span key={badge}>{badge}</span>
             ))}
           </div>
-          <p className="profile-lead">{profile.intro}</p>
+          <p className="profile-lead">{profile.experience}</p>
+          <p className="profile-detail">{profile.intro}</p>
           <p className="profile-detail">{profile.detail}</p>
         </div>
         <aside className="quick-specs" aria-label="Quick system specs">

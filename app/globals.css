@@ -314,6 +314,9 @@ h3 {
   line-height: 1.65;
   color: var(--muted);
 }
+.profile-detail + .profile-detail {
+  margin-top: 10px;
+}
 .quick-specs {
   background: var(--panel);
   border-radius: var(--radius);

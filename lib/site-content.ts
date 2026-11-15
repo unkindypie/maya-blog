@@ -18,10 +18,12 @@ export const profile = {
   face: "(◕‿◕✿)",
   badges: [
     "she/her 🏳️‍⚧️",
-    "Linux + Neovim",
-    "local AI tinkering",
+    "8+ yrs exp :: sr systems architect",
+    "B.S. in Software Engineering",
     "● status: hacking / alive",
   ],
+  experience:
+    "I've spent the last 8+ years designing distributed infrastructure and building backends from zero to millions of requests per second, across seed to Series B tech teams. These days I split my time between private systems consulting and my own projects.",
   intro:
     "I like making my tools feel like mine. Most of that ends up in my Neovim config, my Linux desktop, and little scripts that make the two get along.",
   detail:
