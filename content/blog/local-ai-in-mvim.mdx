@@ -2,10 +2,18 @@
 title: "local AI in mvim: give the model some context"
 category: Neovim / local AI
 date: "2026-10-29"
-description: Cursortab, Ollama, and a bounded LSP cache for completions and next-edit suggestions.
+description: Why I moved from Copilot to local AI suggestions in mvim, using Cursortab, Ollama, and context from the language server.
 ---
 
 [Project: maya-nvim](https://github.com/unkindypie/maya-nvim) · [Context collector](https://github.com/unkindypie/maya-nvim/blob/master/lua/maya/ai_context.lua)
+
+I started using Copilot during its free closed beta in 2021. I applied, got access, and loved it.
+
+From April 2022 through October 2026, I kept paying $10 a month for it. Eventually I realised I was paying for something I barely used. When I did use it, it was just for suggestions in the editor.
+
+Most of my agentic work was already happening in OpenCode and Codex. I still wanted inline suggestions, but paying for another tool just for those didn't make much sense anymore. So I decided to move that part local.
+
+## a local model still needs context
 
 A local model can see the text around my cursor. That doesn't mean it knows the type of the thing I'm calling, or where a field came from. The language server often does.
 

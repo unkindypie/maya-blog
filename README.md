@@ -31,7 +31,7 @@ For example, a spec row in About is editable directly:
 />
 ```
 
-Blog posts cover maya-nvim, .maya-dotfiles, local AI in mvim, and OoT mod compatibility on Vita. Publication dates use actual commits near each project's elapsed-history midpoint; [article date notes](docs/article-dates.md) record the selection. Update the profile when your setup changes.
+Blog posts cover maya-nvim, .maya-dotfiles, local AI in mvim, and OoT mod compatibility on Vita. Publication dates are fixed in each article's front matter. Update the profile when your setup changes.
 
 Add a file such as `content/blog/my-post.mdx`:
 
