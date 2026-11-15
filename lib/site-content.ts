@@ -27,14 +27,20 @@ export const profile = {
   detail:
     "I use Fedora 44 with Hyprland, Kitty, zsh, and tmux. My editor is mvim, my own Neovim setup. Lately I've been working on local AI suggestions, keeping desktop themes in sync, and writing down the bits I don't want to figure out twice. Handheld homebrew and Nintendo-to-Vita experiments belong here too, when I have something to share.",
 };
-export const specs = [
-  ["OS", "Fedora Linux 44"],
-  ["Desktop", "Hyprland + Waybar"],
-  ["Shell", "zsh + tmux"],
-  ["Terminal", "Kitty / Fantasque Sans Mono"],
-  ["Editor", "mvim / Neovim"],
-  ["Theme", "Melange + Maya Light/Dark"],
-] as const;
+export interface SystemSpec {
+  readonly label: string;
+  readonly value: string;
+  readonly detail?: string;
+  readonly href?: string;
+}
+export const specs: readonly SystemSpec[] = [
+  { label: "OS", value: "Fedora Linux 44" },
+  { label: "Desktop", value: "Hyprland", detail: "Waybar" },
+  { label: "Shell", value: "zsh", detail: "tmux" },
+  { label: "Terminal", value: "Kitty", detail: "Fantasque Sans Mono" },
+  { label: "Editor", value: "mvim", detail: "Neovim", href: repositories.nvim },
+  { label: "Theme", value: "Melange", detail: "Maya Light/Dark" },
+];
 export const tools = [
   {
     label: "01 / desktop",

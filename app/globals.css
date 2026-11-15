@@ -336,20 +336,28 @@ h3 {
   gap: 4px;
   font-size: 12px;
 }
-.quick-specs dl div {
+.quick-specs .spec-row {
   display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
+  grid-template-columns: 58px minmax(0, 1fr);
+  align-items: center;
+  min-height: 44px;
   gap: 10px;
-  padding: 5px 8px;
+  padding: 8px;
+  border-radius: 3px;
   background: color-mix(in srgb, var(--raised) 60%, transparent);
 }
 .quick-specs dt {
   color: var(--secondary);
 }
-.quick-specs dl div:nth-child(3n) dt {
+.quick-specs .spec-row:nth-child(3n) dt {
   color: var(--tertiary);
 }
 .quick-specs dd {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  min-width: 0;
   margin: 0;
   text-align: right;
   overflow-wrap: normal;
@@ -1046,4 +1054,26 @@ h3 {
   min-width: 0;
   max-width: 100%;
   overflow-wrap: anywhere;
+}
+
+.quick-specs .spec-value {
+  color: var(--foreground);
+}
+.quick-specs .spec-detail {
+  color: var(--dim);
+  font-size: 11px;
+  line-height: 1.5;
+  text-wrap: balance;
+}
+.quick-specs .spec-link {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  border-radius: 2px;
+}
+.quick-specs .spec-link:hover {
+  color: var(--primary-bright);
+}
+.quick-specs .spec-link span {
+  font-size: 10px;
 }

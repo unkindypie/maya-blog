@@ -38,10 +38,19 @@ export function ProfilePage({ className = "" }: Readonly<ProfilePageProps>) {
             <SystemIcon name="terminal" /> QUICK_SPECS.SH
           </h2>
           <dl>
-            {specs.map(([key, value]) => (
-              <div key={key}>
-                <dt>{key}</dt>
-                <dd>{value}</dd>
+            {specs.map(({ label, value, detail, href }) => (
+              <div className="spec-row" key={label}>
+                <dt>{label}</dt>
+                <dd>
+                  {href ? (
+                    <a className="spec-value spec-link" href={href}>
+                      {value} <span aria-hidden="true">↗</span>
+                    </a>
+                  ) : (
+                    <span className="spec-value">{value}</span>
+                  )}
+                  {detail && <span className="spec-detail">{detail}</span>}
+                </dd>
               </div>
             ))}
           </dl>

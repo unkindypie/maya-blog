@@ -6,6 +6,18 @@ import { projectLinks } from "../../../lib/site-content";
 import { InfoCard } from "../../../ui/components/info-card";
 
 describe("ProfilePage", () => {
+  it("links mvim to its repository inside the editor specification", () => {
+    const markup = renderToStaticMarkup(<ProfilePage />);
+    const specs = markup.match(
+      /<aside class="quick-specs"[\s\S]*?<\/aside>/,
+    )?.[0];
+    expect(specs).toMatch(
+      /<dt>Editor<\/dt><dd><a[^>]*href="https:\/\/github.com\/unkindypie\/maya-nvim"[^>]*>mvim /,
+    );
+    expect(specs).toContain('<span class="spec-detail">Neovim</span>');
+    expect(specs?.match(/<dt>/g)).toHaveLength(6);
+    expect(specs?.match(/<dd>/g)).toHaveLength(6);
+  });
   it("renders one page heading and real links to each content section", () => {
     const markup = renderToStaticMarkup(<ProfilePage />);
     expect(markup.match(/<h1>/g)).toHaveLength(1);
