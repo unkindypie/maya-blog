@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { ProfilePage } from "../../../ui/components/profile-page";
@@ -78,6 +79,40 @@ describe("MDX profile components", () => {
     expect(markup).toContain('href="/blog"');
     expect(markup).toContain('href="mailto:author@example.com"');
     expect(markup).not.toContain("Fedora");
+  });
+  it("accepts an optional author portrait while preserving Markdown prose", () => {
+    const markup = renderToStaticMarkup(
+      <ProfileIntro
+        title="My profile"
+        badges={[]}
+        command="about me"
+        workspace="home"
+        portrait={
+          <Image
+            src="/portrait.png"
+            alt="Author portrait"
+            width={144}
+            height={144}
+          />
+        }
+      >
+        <p>Editable biography.</p>
+      </ProfileIntro>,
+    );
+    expect(markup).toContain('class="profile-portrait"');
+    expect(markup).toContain('alt="Author portrait"');
+    expect(markup).toContain("Editable biography.");
+    const withoutPortrait = renderToStaticMarkup(
+      <ProfileIntro
+        title="Text only"
+        badges={[]}
+        command="about"
+        workspace="home"
+      >
+        <p>No photo supplied.</p>
+      </ProfileIntro>,
+    );
+    expect(withoutPortrait).not.toContain('class="profile-portrait"');
   });
   it("keeps specification labels, values, detail text, and links editable", () => {
     const markup = renderToStaticMarkup(

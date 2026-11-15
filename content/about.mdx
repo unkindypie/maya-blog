@@ -1,10 +1,13 @@
 ---
 title: Maya — systems engineer & tinkerer
 socialTitle: "hey, i'm maya"
-socialDescription: Systems engineering, Neovim, Linux, local AI & Vita homebrew.
+socialDescription: Systems engineering, Neovim, Linux, local AI & PS Vita homebrew.
 fullWidth: true
 description: Maya's Linux desktop, Neovim config, local AI experiments, and Ocarina of Time modding on Vita.
 ---
+
+import Image from "next/image";
+import portrait from "@/public/images/maya-portrait.png";
 
 import { ProfilePage } from "@/ui/components/profile-page";
 import { ProfileHero, ProfileIntro } from "@/ui/components/profile-hero";
@@ -25,11 +28,20 @@ import { GitHubActivity } from "@/ui/components/github-activity";
 <ProfileIntro
   title="hey, i'm Maya"
   face="(◕‿◕✿)"
+  portrait={
+    <Image
+      src={portrait}
+      alt="Maya"
+      sizes="(max-width: 767px) 112px, (min-width: 2560px) 230px, 144px"
+      loading="eager"
+    />
+  }
   badges={[
     "she/her 🏳️‍⚧️",
     "8+ yrs exp :: sr software engineer",
     "B.S. in Software Engineering",
     "● status: hacking / alive",
+    "based at: EU"
   ]}
   command="cat /dev/maya >> stdout"
   workspace="workspace 1"
