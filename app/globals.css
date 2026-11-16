@@ -18,6 +18,7 @@
   --primary: #f5c2e7;
   --primary-bright: #ffe7f5;
   --secondary: #d9b9ff;
+  --feed-blue: #89b4fa;
   --tertiary: #fbb3c0;
   --on-primary: #472441;
   --radius: 0.5rem;
@@ -137,19 +138,35 @@ summary {
   font-size: 11px;
   border-radius: 4px;
 }
-.profile-link {
-  height: 32px;
+.taskbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.taskbar-action {
   width: 32px;
+  height: 32px;
   display: grid;
   place-items: center;
-  background: var(--primary-bright);
-  color: var(--on-primary);
-  border-radius: 12px;
-  box-shadow: 0 0 10px #f5c2e726;
+  border-radius: 8px;
+  background: var(--panel);
 }
-.profile-link:hover {
-  color: var(--on-primary);
-  background: var(--primary);
+.taskbar-action svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.feed-link,
+.feed-link:hover {
+  color: var(--feed-blue);
+}
+.github-link,
+.github-link:hover {
+  color: var(--primary);
+}
+.taskbar-action:hover {
+  background: var(--raised);
 }
 .explorer {
   position: fixed;
@@ -811,11 +828,6 @@ h3 {
   .workspaces {
     display: none;
   }
-  .profile-link {
-    width: 28px;
-    height: 28px;
-    flex-shrink: 0;
-  }
   .workspace-switcher {
     gap: 0;
   }
@@ -943,9 +955,6 @@ h3 {
 @media (max-width: 359px) {
   .taskbar {
     padding: 0 8px;
-  }
-  .profile-link {
-    display: none;
   }
   .tabs a {
     padding: 6px 5px;
@@ -1401,5 +1410,35 @@ h3 {
   .portrait-leaf,
   .portrait-blossom {
     animation: none;
+  }
+}
+
+@media (max-width: 479px) {
+  .taskbar {
+    height: 96px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 40px 44px;
+    gap: 0 8px;
+    padding: 6px 12px;
+  }
+  .taskbar .workspace-switcher {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+  .taskbar-actions {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+  }
+  .taskbar > .tabs {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: center;
+    margin-left: 0;
+  }
+  .mobile-explorer {
+    margin-top: 96px;
   }
 }

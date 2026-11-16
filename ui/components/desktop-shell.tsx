@@ -7,6 +7,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { SiteNav } from "./site-nav";
 import { SystemIcon } from "./system-icon";
+import { GitHubIcon } from "nextra/icons";
 export interface DesktopShellProps {
   readonly children: ReactNode;
   readonly posts: readonly Post[];
@@ -23,9 +24,28 @@ export function DesktopShell({ children, posts }: Readonly<DesktopShellProps>) {
           <SiteNav variant="workspaces" />
         </div>
         <SiteNav />
-        <Link href="/about" className="profile-link" aria-label="About Maya">
-          <SystemIcon name="person" />
-        </Link>
+        <nav className="taskbar-actions" aria-label="Follow Maya">
+          <a
+            href="/feed.xml"
+            className="taskbar-action feed-link"
+            aria-label="RSS feed"
+            title="RSS feed"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <SystemIcon name="rss" />
+          </a>
+          <a
+            href={contact.github}
+            className="taskbar-action github-link"
+            aria-label="Maya on GitHub"
+            title="Maya on GitHub"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <GitHubIcon aria-hidden="true" focusable="false" />
+          </a>
+        </nav>
       </header>
       <aside className="explorer">
         <div className="explorer-label">

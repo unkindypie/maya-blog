@@ -18,3 +18,23 @@ it("keeps the cat logo as an accessible home link with a decorative local image"
   expect(homeLink).toContain('alt=""');
   expect(homeLink).not.toContain("ฅ");
 });
+
+it("replaces the About shortcut with accessible RSS and GitHub links", () => {
+  const markup = renderToStaticMarkup(
+    <DesktopShell posts={[]}>
+      <h1>Home</h1>
+    </DesktopShell>,
+  );
+  const rss = markup.match(/<a[^>]*aria-label="RSS feed"[\s\S]*?<\/a>/)?.[0];
+  const github = markup.match(
+    /<a[^>]*aria-label="Maya on GitHub"[\s\S]*?<\/a>/,
+  )?.[0];
+  expect(rss).toContain('href="/feed.xml"');
+  expect(github).toContain('href="https://github.com/unkindypie"');
+  for (const link of [rss, github]) {
+    expect(link).toContain('target="_blank"');
+    expect(link).toContain('rel="noopener noreferrer"');
+    expect(link).toContain('aria-hidden="true"');
+  }
+  expect(markup).not.toContain('aria-label="About Maya"');
+});
