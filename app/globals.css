@@ -1356,7 +1356,14 @@ h3 {
   white-space: nowrap;
 }
 
+/* A shared energy envelope gives each burst a lively peak and a quiet rest. */
+@property --portrait-energy {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0.08;
+}
 .portrait-flourish {
+  --portrait-energy: 0.08;
   position: absolute;
   top: 0;
   left: -66.6667%;
@@ -1365,52 +1372,122 @@ h3 {
   overflow: visible;
   color: var(--primary);
   pointer-events: none;
+  animation: portrait-energy-cycle 48s ease-in-out infinite;
+}
+.portrait-ring {
+  opacity: calc(0.65 + var(--portrait-energy) * 0.3);
+}
+.portrait-sprig {
+  /* The view-box origin maps to the stem's attachment point at (5, 98). */
+  transform-box: view-box;
+  transform-origin: 42.083333% 68.055556%;
+  animation: portrait-sprig-sway 5.8s ease-in-out infinite alternate;
 }
 .portrait-leaf {
+  --leaf-turn: 14deg;
   transform-box: fill-box;
   transform-origin: 80% 90%;
-  animation: portrait-leaf-sway 7s ease-in-out infinite alternate;
+  animation: portrait-leaf-sway 4.7s ease-in-out infinite alternate;
 }
 .portrait-leaf-two {
-  animation-delay: -3s;
+  --leaf-turn: -11deg;
+  animation-duration: 5.9s;
+  animation-delay: -1.4s;
 }
 .portrait-leaf-three {
+  --leaf-turn: 12deg;
   transform-origin: 95% 10%;
-  animation-delay: -1.5s;
+  animation-duration: 6.7s;
+  animation-delay: -2.1s;
 }
 .portrait-leaf-four {
+  --leaf-turn: -15deg;
   transform-origin: 95% 5%;
-  animation-delay: -4.5s;
+  animation-duration: 7.3s;
+  animation-delay: -3.6s;
 }
 .portrait-blossom {
   transform-box: fill-box;
   transform-origin: center;
-  animation: portrait-blossom-breathe 9s ease-in-out infinite;
+  animation: portrait-blossom-breathe 4.1s ease-in-out infinite alternate;
+}
+/* Unequal burst windows and different sway periods vary the following cycle. */
+@keyframes portrait-energy-cycle {
+  0%,
+  100% {
+    --portrait-energy: 0.08;
+  }
+  5%,
+  36%,
+  70% {
+    --portrait-energy: 0.85;
+  }
+  12%,
+  48%,
+  84% {
+    --portrait-energy: 1;
+  }
+  20%,
+  55%,
+  92% {
+    --portrait-energy: 0.04;
+  }
+  32%,
+  65% {
+    --portrait-energy: 0.1;
+  }
+}
+@keyframes portrait-sprig-sway {
+  from {
+    transform: rotate(calc(-6deg * var(--portrait-energy)));
+  }
+  to {
+    transform: rotate(calc(6deg * var(--portrait-energy)));
+  }
 }
 @keyframes portrait-leaf-sway {
   from {
-    transform: rotate(-2deg);
+    transform: rotate(calc(var(--leaf-turn) * var(--portrait-energy) * -1));
   }
   to {
-    transform: rotate(2deg);
+    transform: rotate(calc(var(--leaf-turn) * var(--portrait-energy)));
   }
 }
 @keyframes portrait-blossom-breathe {
-  0%,
-  100% {
-    transform: rotate(-4deg) scale(0.98);
+  from {
+    transform: rotate(calc(-18deg * var(--portrait-energy)))
+      scale(calc(1 - 0.04 * var(--portrait-energy)));
     opacity: 0.85;
   }
-  50% {
-    transform: rotate(4deg) scale(1.03);
+  to {
+    transform: rotate(calc(28deg * var(--portrait-energy)))
+      scale(calc(1 + 0.2 * var(--portrait-energy)));
     opacity: 1;
   }
 }
+@media (min-width: 768px) and (max-width: 899px) {
+  .profile-heading.has-portrait {
+    column-gap: 56px;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
+  .portrait-flourish {
+    --portrait-energy: 0;
+    animation: none;
+  }
+  .portrait-sprig,
   .portrait-leaf,
   .portrait-blossom {
     animation: none;
   }
+  .portrait-ring {
+    opacity: 0.8;
+  }
+}
+.feed-link {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 @media (max-width: 479px) {

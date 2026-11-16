@@ -6,7 +6,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { SiteNav } from "./site-nav";
-import { SystemIcon } from "./system-icon";
 import { GitHubIcon } from "nextra/icons";
 export interface DesktopShellProps {
   readonly children: ReactNode;
@@ -33,7 +32,7 @@ export function DesktopShell({ children, posts }: Readonly<DesktopShellProps>) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <SystemIcon name="rss" />
+            RSS
           </a>
           <a
             href={contact.github}

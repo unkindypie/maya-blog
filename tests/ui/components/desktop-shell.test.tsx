@@ -34,7 +34,9 @@ it("replaces the About shortcut with accessible RSS and GitHub links", () => {
   for (const link of [rss, github]) {
     expect(link).toContain('target="_blank"');
     expect(link).toContain('rel="noopener noreferrer"');
-    expect(link).toContain('aria-hidden="true"');
   }
+  expect(rss).toContain(">RSS</a>");
+  expect(rss).not.toContain("<svg");
+  expect(github).toContain('aria-hidden="true"');
   expect(markup).not.toContain('aria-label="About Maya"');
 });
