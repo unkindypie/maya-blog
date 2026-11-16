@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { PortraitFlourish } from "./portrait-flourish";
 
 export interface ProfileHeroProps {
   readonly children: ReactNode;
@@ -49,7 +50,12 @@ export function ProfileIntro({
             ))}
           </div>
         </div>
-        {portrait && <div className="profile-portrait">{portrait}</div>}
+        {portrait && (
+          <div className="profile-portrait">
+            {portrait}
+            <PortraitFlourish />
+          </div>
+        )}
       </div>
       <div className="profile-copy">{children}</div>
     </div>

@@ -100,6 +100,9 @@ describe("MDX profile components", () => {
       </ProfileIntro>,
     );
     expect(markup).toContain('class="profile-portrait"');
+    expect(markup).toMatch(
+      /<svg[^>]*class="portrait-flourish"[^>]*aria-hidden="true"/,
+    );
     expect(markup).toContain('alt="Author portrait"');
     expect(markup).toContain("Editable biography.");
     const withoutPortrait = renderToStaticMarkup(
@@ -113,6 +116,7 @@ describe("MDX profile components", () => {
       </ProfileIntro>,
     );
     expect(withoutPortrait).not.toContain('class="profile-portrait"');
+    expect(withoutPortrait).not.toContain("portrait-flourish");
   });
   it("keeps specification labels, values, detail text, and links editable", () => {
     const markup = renderToStaticMarkup(

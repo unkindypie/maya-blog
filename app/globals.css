@@ -1287,10 +1287,10 @@ h3 {
   margin-bottom: 0;
 }
 .profile-portrait {
+  position: relative;
   width: 144px;
   aspect-ratio: 1;
-  padding: 4px;
-  border: 1px solid var(--primary);
+  padding: 5px;
   border-radius: 50%;
   background: var(--panel);
 }
@@ -1345,4 +1345,61 @@ h3 {
   line-height: 1.5;
   color: var(--dim);
   white-space: nowrap;
+}
+
+.portrait-flourish {
+  position: absolute;
+  top: 0;
+  left: -66.6667%;
+  width: 166.6667%;
+  height: 100%;
+  overflow: visible;
+  color: var(--primary);
+  pointer-events: none;
+}
+.portrait-leaf {
+  transform-box: fill-box;
+  transform-origin: 80% 90%;
+  animation: portrait-leaf-sway 7s ease-in-out infinite alternate;
+}
+.portrait-leaf-two {
+  animation-delay: -3s;
+}
+.portrait-leaf-three {
+  transform-origin: 95% 10%;
+  animation-delay: -1.5s;
+}
+.portrait-leaf-four {
+  transform-origin: 95% 5%;
+  animation-delay: -4.5s;
+}
+.portrait-blossom {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: portrait-blossom-breathe 9s ease-in-out infinite;
+}
+@keyframes portrait-leaf-sway {
+  from {
+    transform: rotate(-2deg);
+  }
+  to {
+    transform: rotate(2deg);
+  }
+}
+@keyframes portrait-blossom-breathe {
+  0%,
+  100% {
+    transform: rotate(-4deg) scale(0.98);
+    opacity: 0.85;
+  }
+  50% {
+    transform: rotate(4deg) scale(1.03);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portrait-leaf,
+  .portrait-blossom {
+    animation: none;
+  }
 }
