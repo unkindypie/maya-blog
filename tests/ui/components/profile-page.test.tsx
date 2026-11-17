@@ -118,6 +118,20 @@ describe("MDX profile components", () => {
     expect(withoutPortrait).not.toContain('class="profile-portrait"');
     expect(withoutPortrait).not.toContain("portrait-flourish");
   });
+  it("allows highlighting the secondary spec without changing the reading order", () => {
+    const markup = renderToStaticMarkup(
+      <SpecRow
+        label="OS"
+        value="Fedora Linux 44"
+        detail="Hyprland WM"
+        highlightDetail
+      />,
+    );
+    expect(markup).toContain("spec-highlight-detail");
+    expect(markup.indexOf("Fedora Linux 44")).toBeLessThan(
+      markup.indexOf("Hyprland WM"),
+    );
+  });
   it("keeps specification labels, values, detail text, and links editable", () => {
     const markup = renderToStaticMarkup(
       <QuickSpecs title="MY_SPECS" footer="My machine" status="available">

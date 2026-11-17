@@ -30,6 +30,7 @@ export interface SpecRowProps {
   readonly label: string;
   readonly value: string;
   readonly detail?: string;
+  readonly highlightDetail?: boolean;
   readonly href?: string;
   readonly wide?: boolean;
   readonly alongside?: readonly string[];
@@ -38,13 +39,16 @@ export function SpecRow({
   label,
   value,
   detail,
+  highlightDetail,
   href,
   wide,
   alongside,
 }: Readonly<SpecRowProps>) {
   const isExternal = href !== undefined && /^https?:\/\//.test(href);
   return (
-    <div className={`spec-row${wide ? " spec-wide" : ""}`}>
+    <div
+      className={`spec-row${wide ? " spec-wide" : ""}${highlightDetail ? " spec-highlight-detail" : ""}`}
+    >
       <dt>{label}</dt>
       <dd className={alongside?.length ? "spec-pair" : undefined}>
         <div className="spec-values">

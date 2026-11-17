@@ -1103,6 +1103,12 @@ h3 {
   line-height: 1.5;
   text-wrap: balance;
 }
+.quick-specs .spec-highlight-detail .spec-value {
+  color: var(--dim);
+}
+.quick-specs .spec-highlight-detail .spec-detail {
+  color: var(--foreground);
+}
 .quick-specs .spec-link {
   color: var(--primary);
   text-decoration: underline;
