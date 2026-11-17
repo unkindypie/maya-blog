@@ -7,7 +7,7 @@ description: Maya's Linux desktop, Neovim config, local AI experiments, and Ocar
 ---
 
 import Image from "next/image";
-import portrait from "@/public/images/maya-portrait.png";
+import portrait from "@/public/images/maya-portrait.webp";
 
 import { ProfilePage } from "@/ui/components/profile-page";
 import { ProfileHero, ProfileIntro } from "@/ui/components/profile-hero";
@@ -31,6 +31,7 @@ import { GitHubActivity } from "@/ui/components/github-activity";
   portrait={
     <Image
       src={portrait}
+      unoptimized={false}
       alt="Maya"
       sizes="(max-width: 767px) 112px, (min-width: 2560px) 230px, 144px"
       loading="eager"

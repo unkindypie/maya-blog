@@ -199,6 +199,7 @@ describe("ProjectGrid", () => {
     );
     expect(markup).toContain('id="my-project"');
     expect(markup).toContain('href="/blog/my-project"');
+    expect(markup).toContain('aria-label="Read more: My project"');
     expect(markup).toContain("Authored in MDX");
     expect(markup.match(/class="info-card"/g)).toHaveLength(1);
   });

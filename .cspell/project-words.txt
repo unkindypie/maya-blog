@@ -41,3 +41,5 @@ unstub
 Waybar
 Wofi
 zsh
+
+nosniff

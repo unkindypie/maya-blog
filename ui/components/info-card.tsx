@@ -36,7 +36,11 @@ export function InfoCard({
       {links && (
         <div className="card-links">
           {links.map((link) => (
-            <Link key={link.href} href={link.href}>
+            <Link
+              key={link.href}
+              href={link.href}
+              aria-label={`${link.label}: ${title}`}
+            >
               {link.label} <span aria-hidden="true">↗</span>
             </Link>
           ))}

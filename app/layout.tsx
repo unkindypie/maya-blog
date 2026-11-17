@@ -30,6 +30,13 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <Head backgroundColor={{ dark: "#161215", light: "#161215" }} />
+      <link
+        rel="preload"
+        href="/fonts/jetbrains-mono.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+      />
       <body>
         <StructuredData data={siteStructuredData} />
         <a className="skip-link" href="#content">
